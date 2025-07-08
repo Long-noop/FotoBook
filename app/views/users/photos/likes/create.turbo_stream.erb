@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@photo)}_like" do %>
+  <%= render partial: "users/likes/like_button", locals: { likeable: @photo } %>
+<% end %>

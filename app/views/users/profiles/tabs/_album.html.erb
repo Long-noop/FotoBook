@@ -1,0 +1,23 @@
+<div class="add-button mb-4">
+    <button><%= link_to 'Add Album', new_users_album_path %></button>
+</div>
+<div class="row g-4 album-list">
+    <% @user.albums.each do |album|%>
+        <div class="col-md-3 px-0">
+            <div class="album-thumbnail-stack">
+                <div class="count">
+                    <span class="number"><%= album.photos.count%></span> <span class="label">PHOTOS</span>
+                </div>
+                <% first_photo = album.photos.last%>
+                <% if first_photo&.featured_image&.present? %>
+                    <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img img-front"%>
+                    <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img img-middle"%>
+                    <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img img-back"%>
+                <%# <% else %>
+                    <%# <%= image_tag ".png", class: "album-thumbnail-img album-img-front", alt: "No Image" %>
+                <% end %>
+            </div>
+            <p class="text-center"><%=album.title%></p>
+        </div>
+    <%end%>
+</div>

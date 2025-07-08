@@ -1,0 +1,114 @@
+body {
+    height: 100%;
+    overflow: hidden;
+    background-color: #f0f2f5;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-custom {
+    background-color: #4267b2; 
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+    color: white;
+    font-weight: bold;
+}
+.navbar-custom .navbar-brand {
+    text-align: end;
+}
+.sidebar {
+    background-color: #f0f2f5;
+    padding: 15px;
+    position: sticky;
+    top: 20px;
+}
+.search-controll {
+    width: 600px;
+}
+
+.login-form{
+    position: fixed;
+    top: 137px;
+}
+.login-title {
+    color: #4267b2 !important; 
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.social-login-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.social-icon {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.social-icon img {
+    width: 80%; 
+    height: 80%;
+    object-fit: contain; 
+}
+
+.user-placeholder-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px; 
+    color: #a0a0a0;
+    margin: 0 auto 15px auto; 
+}
+
+.card {
+    border: none;
+    border-radius: 8px; 
+}
+
+.btn-primary {
+    background-color: #4267b2;
+    border-color: #4267b2;
+    font-size: 1.1rem; 
+    padding: 10px 0; 
+}
+
+.btn-primary:hover {
+    background-color: #5b32a2; 
+    border-color: #5b32a2;
+}
+
+.form-control {
+    border-radius: 4px;
+}
+
+.text-decoration-none {
+    color: #4267b2 !important; 
+    color: #4267b2 !important;
+}
+
+.new-account {
+    color: #4267b2 !important;
+}
+
+.form-check, .d-flex.justify-content-between.align-items-center.mb-3 {
+    display: none !important;
+}

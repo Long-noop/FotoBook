@@ -1,0 +1,15 @@
+<div class="add-button mb-4">
+    <button><%= link_to 'Add Photo', new_users_photo_path %></button>
+</div>
+<div class="row g-4 photo-list">
+    <% @user.photos.each do |photo|%>
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <% if photo.featured_image.present? %>
+                    <%= image_tag photo.featured_image.url%>
+                <%end%>
+            </div>
+            <p class="text-center"><%= photo.title%></p>
+        </div>
+    <%end%>
+</div>

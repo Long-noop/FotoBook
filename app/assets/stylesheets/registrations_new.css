@@ -1,0 +1,114 @@
+body {
+    height: 100%;
+    overflow: hidden;
+    background-color: #f0f2f5;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-custom {
+    background-color: #4267b2; 
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+    color: white;
+    font-weight: bold;
+}
+.navbar-custom .navbar-brand {
+    text-align: end;
+}
+.sidebar {
+    background-color: #f0f2f5;
+    padding: 15px;
+    position: sticky;
+    top: 20px;
+}
+
+.search-controll {
+    width: 600px;
+}
+.login-title {
+    color: #4267b2 !important; /* Màu chữ tiêu đề - chỉnh lại theo hình ảnh mới */
+    font-size: 1.8rem; /* Kích thước chữ tiêu đề - chỉnh lại theo hình ảnh mới */
+    font-weight: bold; /* Đậm hơn */
+}
+
+/* Social Login Card */
+.social-login-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.social-icon {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%; /* Hình tròn */
+    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài khung tròn nếu nó to hơn */
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.social-icon img {
+    width: 80%; /* Để ảnh nhỏ hơn một chút so với khung tròn, tạo padding ảo */
+    height: 80%;
+    object-fit: contain; /* Đảm bảo ảnh không bị méo và vừa với khung */
+    /* Nếu ảnh có nền trong suốt và bạn muốn khung tròn có màu, thì màu nền đặt ở .social-icon */
+}
+
+.user-placeholder-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0; /* Màu xám của hình ảnh */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px; /* Kích thước icon */
+    color: #a0a0a0; /* Màu icon bên trong */
+    margin: 0 auto 15px auto; /* Căn giữa và khoảng cách dưới */
+}
+
+.card {
+    border: none;
+    border-radius: 8px; /* Đảm bảo bo tròn cho các card */
+}
+
+.btn-primary {
+    background-color: #4267b2; /* Màu tím cho nút Login */
+    border-color: #4267b2;
+    font-size: 1.1rem; /* Kích thước chữ lớn hơn */
+    padding: 10px 0; /* Padding cho nút */
+}
+
+.btn-primary:hover {
+    background-color: #5b32a2; /* Màu tối hơn khi hover */
+    border-color: #5b32a2;
+}
+
+.form-control {
+    border-radius: 4px; /* Bo tròn nhẹ cho input fields */
+}
+
+.text-decoration-none {
+    color: #4267b2 !important; /* Màu link - có thể cần điều chỉnh */
+    /* Màu cho "Forgot password?" */
+    color: #4267b2 !important;
+}
+
+.new-account {
+    color: #4267b2 !important; /* Màu link cho "Create an account" */
+}
+
+/* Remove checkbox and "Need help?" as they are not in the new image */
+.form-check, .d-flex.justify-content-between.align-items-center.mb-3 {
+    display: none !important;
+}

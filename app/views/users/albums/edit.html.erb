@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'albums_edit', media: 'all', data: { turbolinks: false } %>
+
+</head>
+<body>
+    <%=render 'users/navbar'%>
+
+    <div class="container-fluid main-content px-4">
+        <div class="row">
+            <%= render 'users/sidebar'%>
+            <div class="col-lg-9 px-0 mb-0">
+                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 px-0 mb-0">
+                    <div class="col col-lg-12 d-flex flex-column">
+                        <div class="col-lg-12 mb-4 card-header">
+                            <h2 class="edit-photo-title">Edit Album</h2>
+                            <button class="btn btn-dark back-button">Back</button>
+                        </div>
+                        <div class="under"></div>
+                        <div class="card p-4">
+                            <form>
+                                <div class="d-flex justify-content-between">
+                                    <div class="g-4">
+                                        <div class="mb-3">
+                                            <label for="photoTitle" class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="photoTitle" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sharingMode" class="form-label">Sharing mode</label>
+                                            <select class="form-select" id="sharingMode">
+                                                <option selected>Public</option>
+                                                <option value="1">Private</option>
+                                                <option value="2">Friends Only</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="photoDescription" class="form-label">Description</label>
+                                        <textarea class="form-control" id="photoDescription" rows="8" placeholder="..."></textarea>                                    </div>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="photo-thumbnail-container">
+                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
+                                        <button type="button" class="btn-remove-photo">
+                                            <img src="../../../assets/close icon.png" alt="">
+                                        </button>
+                                    </div>
+                                    <div class="photo-thumbnail-container">
+                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
+                                        <button type="button" class="btn-remove-photo">
+                                            <img src="../../../assets/close icon.png" alt="">
+                                        </button>
+                                    </div>
+                                    <div class="photo-thumbnail-container">
+                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
+                                        <button type="button" class="btn-remove-photo">
+                                            <img src="../../../assets/close icon.png" alt="">
+                                        </button>
+                                    </div>
+                                    <div class="add-photo-placeholder">
+                                        <img src="../../../assets/plus icon.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3 submit">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+
+body {
+    background-color: #f0f2f5; 
+    padding-top: 70px   ;
+}
+.navbar-custom {
+    background-color: #4267b2;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100; 
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+    color: white;
+    font-weight: bold;
+}
+.navbar-custom .navbar-brand {
+    text-align: end;
+}
+.navbar-nav {
+    display: flex;
+    gap: 40px;
+}
+.sidebar {
+    background-color: #f0f2f5;
+    position: sticky;
+    top: 90px;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar ul li a {
+    display: block;
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: 80px;
+}
+.sidebar ul li a:hover {
+    border-radius: 4px;
+    color: #4267b2;
+}
+.form-control {
+    width: 300px;
+    
+}
+.main-content {
+    padding-top: 20px;
+}
+.main-workspace {
+    background-color: white;
+    padding: 20px;
+}
+
+.main-workspace img{
+}
+
+.edit-photo-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; 
+    padding-top: 0;
+    border-bottom: 2px solid #E0E0E0;
+    margin-bottom: 50px;
+}
+
+.card-header h2{
+    font-size: 15px;
+}
+
+.card-header .btn{
+    background: #4267b2;    
+    color: #FFFFFF;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.25rem;
+}
+.form-control{
+    width: 440px; 
+    height: 32px;
+}
+
+.form-select{
+    width: 188px; 
+    height: 32px;
+}
+#photoDescription {
+    width: 440px; 
+    height: 110px;
+    overflow-y: auto;
+    resize: vertical;
+}
+.photo-thumbnail-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.photo-thumbnail-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-remove-photo {
+    position: absolute;
+    top: 1px; 
+    right: 1px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: none;
+}
+.add-photo-placeholder{
+    width: 180px;
+    height: 180px;
+    background: #F2F2F2;
+    color: #BDBDBD;
+    border: 2px dashed #BDBDBD;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.add-photo-placeholder:hover {
+    background-color: #e8e8e8;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.submit {
+    margin-top: 50px;
+}
+
+#photo-preview-list img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 15px;
+}

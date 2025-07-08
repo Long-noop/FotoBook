@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'profiles_show', media: 'all', data: { turbolinks: false } %>
+
+</head>
+<body>
+    <%= render 'users/navbar' %>
+
+    <div class="container-fluid main-content px-4">
+        <div class="row">
+            <%= render 'users/sidebar'%>
+            <div class="col-lg-9">
+                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                    <div class="col col-lg-12 d-flex flex-column">
+                        <div class="d-flex align-items-center mb-4">  
+                            <% if @user.avatar.present? %>
+                                <%= image_tag @user.avatar.url, class: "rounded-circle me-3", alt: "Avatar", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <% else %>
+                                <%= image_tag "plus_icon.png", class: "rounded-circle me-3", alt: "Avatar", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <% end %>
+                            <div>
+                                <div class="card-body">
+                                    <div class="is-following follow-btn">
+                                        <p class="following-text follow-text-label">Follow</p>
+                                    </div> 
+                                </div>
+                                <h2 class="fw-bold mb-0"><%= @user.first_name %> <%= @user.last_name %></h2>
+                            <div class="mt-1 d-flex align-items-center gap-3 profile-stats">
+                                <div class="tab photo-tab <%= 'active' if params[:tab] == 'photos' || params[:tab].blank? %>">
+                                    <%= link_to users_profile_path(@user, tab: 'photos') do %>
+                                        <span class="count-number"><%= @user.photos.count %></span>
+                                        <span class="fw-bold count-label">PHOTOS</span>
+                                    <% end %>
+                                </div>
+
+                                <div class="tab album-tab <%= 'active' if params[:tab] == 'albums' %>">
+                                    <%= link_to users_profile_path(@user, tab: 'albums') do %>
+                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="fw-bold count-label">ALBUMS</span>
+                                    <% end %>
+                                </div>
+                                <div class="tab album-tab <%= 'active' if params[:tab] == 'followings' %>">
+                                    <%= link_to users_profile_path(@user, tab: 'followings') do %>
+                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="fw-bold count-label">FOLLOWINGS</span>
+                                    <% end %>
+                                </div>
+                                <div class="tab album-tab <%= 'active' if params[:tab] == 'followers' %>">
+                                    <%= link_to users_profile_path(@user, tab: 'followers') do %>
+                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="fw-bold count-label">FOLLOWERS</span>
+                                    <% end %>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <% case params[:tab] %>
+                        <% when 'albums' %>
+                            <%= render 'users/profiles/tabs/album'%>
+                        <% when 'photos' %>
+                            <%= render 'users/profiles/tabs/photo'%>
+                        <% when 'followers'%>
+                            <%= render 'users/profiles/tabs/follower'%>
+                        <% when 'followings'%>
+                            <%= render 'users/profiles/tabs/following'%>
+                        <% else%>   
+                            <%= render 'users/profiles/tabs/photo'%>
+                        <%end%>
+                    </div>
+                </div>
+
+                <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Xem ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" class="img-fluid" id="modalImage" alt="Image">
+                    <p id="modalDescription"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
