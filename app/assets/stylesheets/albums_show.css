@@ -251,6 +251,9 @@ body {
 .heart-button {
     cursor: pointer; 
     user-select: none;
+    border: none;
+    background: none;
+    display: flex;
 }
 
 .heart-button svg {

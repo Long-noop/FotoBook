@@ -37,7 +37,6 @@
                                                         ['Private', 'private_mode'],
                                                         ], { selected: 'public_mode' }, { class: "form-select" } %>
                                                 </div>
-
                                             </div>
                                             <div class="mb-3">
                                                 <%= form.label :description, class: "form-label" %>
@@ -46,9 +45,8 @@
                                         </div>
                                         
                                         <%= form.label :photos, for: "album_photos" do %>
-                                            <div class="photo-upload-container d-flex flex-wrap">
-                                                <div id="photo-preview-list" class="d-flex flex-wrap gap-4"></div>
-                                                <label for="album_photos" class="add-photo-placeholder">
+                                            <div class="photo-upload-container d-flex flex-wrap gap-4">
+                                                <label for="album_photos" class="add-photo-placeholder ">
                                                     <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
                                                 </label>
                                                 <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]" %>
@@ -68,23 +66,57 @@
     </div>
 </body>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("album_photos");
-  const previewList = document.getElementById("photo-preview-list");
+    document.addEventListener("DOMContentLoaded", () => {
+    const albumPhotosInput = document.getElementById("album_photos");
+    const photoUploadContainer = document.querySelector(".photo-upload-container"); // Container chính
+    const addPhotoPlaceholder = document.querySelector(".add-photo-placeholder"); // Dấu cộng
 
-  input.addEventListener("change", (event) => {
-    const files = event.target.files;
+    albumPhotosInput.addEventListener("change", (event) => {
+        const files = event.target.files;
 
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        previewList.appendChild(img);
-      };
-      reader.readAsDataURL(files[i]);
-    }
-  });
-});
+        for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) { // Đảm bảo là file ảnh
+            const reader = new FileReader();
+            reader.onload = function (e) {
+            const photoPreviewItem = document.createElement("div");
+            photoPreviewItem.classList.add("photo-preview-item");
+
+            const img = document.createElement("img");
+            img.src = e.target.result;
+
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.classList.add("btn-remove-photo"); // Sử dụng lại class này
+            removeButton.innerHTML = '<i class="bi bi-x"></i>';
+
+            removeButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                photoPreviewItem.remove();
+            });
+
+            photoPreviewItem.appendChild(img);
+            photoPreviewItem.appendChild(removeButton);
+
+            // Chèn ảnh mới ngay TRƯỚC addPhotoPlaceholder
+            photoUploadContainer.insertBefore(photoPreviewItem, addPhotoPlaceholder);
+            };
+            reader.readAsDataURL(file);
+        }
+        }
+    });
+
+    document.querySelectorAll('.btn-remove-photo').forEach(button => {
+        button.addEventListener('click', function(event) {
+        // event.stopPropagation();
+        const photoItem = button.closest('.photo-preview-item');
+        if (photoItem) {
+            photoItem.remove();
+            console.log("Ảnh đã tồn tại được xóa khỏi DOM.");
+        }
+        });
+    });
+
+    });
 </script>
 </html>

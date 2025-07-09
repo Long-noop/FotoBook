@@ -131,10 +131,6 @@ body {
   background: none;
 }
 
-.add-photo-placeholder.attached {
-  border: none;
-  background: none;
-}
 .add-photo-placeholder input[type="file"] {
     position: absolute;
     left: 0;
