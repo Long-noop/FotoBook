@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= stylesheet_link_tag 'admin_index', media: 'all', data: { turbolinks: false } %>
+    </head>
+    <body>
+
+    <%= render 'admin/navbar' %>
+
+
+    <div class="container-fluid main-content px-4">
+        <div class="row">
+            <%= render 'admin/sidebar'%>
+            <div class="col-lg-9">
+                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                    <div class="col col-lg-12">
+                        <div class="d-flex mb-4 justify-content-center"> 
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Last login</th>
+                                <th></th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%@users.each do |user|%>
+                                <tr>
+                                <th scope="row"><%=user.first_name%></th>
+                                <th scope="row"><%=user.last_name%></th>
+                                <th scope="row"><%=user.email%></th>
+                                <th scope="row"><%=user.updated_at%></th>
+                                <th><button class="btn btn-success">Edit</button></th>
+                                <th><button class="btn btn-danger">Delete</button></th>
+                                </tr>
+                                <%end%>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

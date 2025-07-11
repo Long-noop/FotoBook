@@ -1,16 +1,17 @@
 class Users::ProfilesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_profile, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @users = User.all
   end
 
   def show
-    @user = current_user
+    @users_follower = current_user.followers
+    @users_following = current_user.followings
   end
 
   def new
-    @user = current_user.build
+    @user = User.build
   end
 
   def create
@@ -23,7 +24,6 @@ class Users::ProfilesController < ApplicationController
   end
 
   def edit
-    @user = current_user
   end
 
   def update
@@ -35,9 +35,16 @@ class Users::ProfilesController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :avatar)
+  end
+
+  def set_profile
+      @user = current_user
   end
 end

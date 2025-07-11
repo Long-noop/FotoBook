@@ -7,6 +7,10 @@
             <div class="card shadow-sm">
                 <% if photo.featured_image.present? %>
                     <%= image_tag photo.featured_image.url%>
+                    <% if photo.private_mode?%>
+                        <div class="lock-icon"> <img src="<%=asset_path('lock_icon.png')%>" alt=""></i></div>
+                    <%end%>
+                    <%= link_to 'EDIT', edit_users_photo_path(photo), class: "edit-button" %>
                 <%end%>
             </div>
             <p class="text-center"><%= photo.title%></p>

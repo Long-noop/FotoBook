@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= stylesheet_link_tag 'albums_edit', media: 'all', data: { turbolinks: false } %>
-
+    <%= stylesheet_link_tag 'albums_new', media: 'all', data: { turbolinks: false } %>
 </head>
 <body>
-    <%=render 'users/navbar'%>
+    <%= render 'users/navbar'%>
 
     <div class="container-fluid main-content px-4">
         <div class="row">
@@ -17,59 +16,61 @@
                     <div class="col col-lg-12 d-flex flex-column">
                         <div class="col-lg-12 mb-4 card-header">
                             <h2 class="edit-photo-title">Edit Album</h2>
-                            <button class="btn btn-dark back-button">Back</button>
+                            <%= link_to "Back", users_albums_path, class: "btn btn-dark back-button" %>
                         </div>
                         <div class="under"></div>
-                        <div class="card p-4">
-                            <form>
-                                <div class="d-flex justify-content-between">
+                            <div class="card p-4">
+                            <%= form_with model: @album, url: users_album_path(@album), method: :patch, local: true, html: { multipart: true } do |form| %>
+                                <div>
                                     <div class="g-4">
-                                        <div class="mb-3">
-                                            <label for="photoTitle" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="photoTitle" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="mb-3">
+                                                    <%= form.label :title, class: "form-label" %>
+                                                    <%= form.text_field :title, class: "form-control", placeholder: "..." %>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <%= form.label :mode, class: "form-label" %>
+                                                    <%= form.select :mode, [
+                                                        ['Public', 'public_mode'],
+                                                        ['Private', 'private_mode'],
+                                                        ], {}, { class: "form-select" } %>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <%= form.label :description, class: "form-label" %>
+                                                <%= form.text_area :description, class: "form-control description", rows: 8, placeholder: "..." %>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="sharingMode" class="form-label">Sharing mode</label>
-                                            <select class="form-select" id="sharingMode">
-                                                <option selected>Public</option>
-                                                <option value="1">Private</option>
-                                                <option value="2">Friends Only</option>
-                                            </select>
+                                        
+                                        <div class="photo-upload-container d-flex flex-wrap gap-4">
+                                            <% if @album.photos.present? %>
+                                                <% @album.photos.each do |photo| %>
+                                                    <div class="photo-preview-item">
+                                                        <img src="<%= photo.featured_image.url %>" alt="Album Photo" class="img-fluid rounded">
+                                                        <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>">
+                                                            <i class="bi bi-x"></i>
+                                                        </button>
+                                                    </div>
+                                                <% end %>
+                                            <% end %>
+                                            
+                                            <label for="album_photos" class="add-photo-placeholder">
+                                                <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
+                                            </label>
+                                            
+                                            <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]" %>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="photoDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="photoDescription" rows="8" placeholder="..."></textarea>                                    </div>
+                                        </div>
                                 </div>
-                                <div class="d-flex gap-3">
-                                    <div class="photo-thumbnail-container">
-                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
-                                        <button type="button" class="btn-remove-photo">
-                                            <img src="../../../assets/close icon.png" alt="">
-                                        </button>
-                                    </div>
-                                    <div class="photo-thumbnail-container">
-                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
-                                        <button type="button" class="btn-remove-photo">
-                                            <img src="../../../assets/close icon.png" alt="">
-                                        </button>
-                                    </div>
-                                    <div class="photo-thumbnail-container">
-                                        <img src="../../../assets/orange.webp" alt="Photo Thumbnail">
-                                        <button type="button" class="btn-remove-photo">
-                                            <img src="../../../assets/close icon.png" alt="">
-                                        </button>
-                                    </div>
-                                    <div class="add-photo-placeholder">
-                                        <img src="../../../assets/plus icon.png" alt="">
-                                    </div>
+                                <div class="d-flex gap-5 submit">
+                                    <%= form.submit "Save", class: "btn btn-success" %>
+                                    <%= link_to "Delete", users_album_path(@album), 
+                                        method: :delete,
+                                        data: { confirm: "Are you sure you want to delete this album?" },
+                                        class: "btn btn-danger" %>
                                 </div>
-                                <div class="d-flex gap-3 submit">
-                                    <button type="submit" class="btn btn-success">Save</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </div>
-                            </form>
+                            <% end %>
                         </div>
                     </div>                 
                 </div>
@@ -77,4 +78,73 @@
         </div>
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const albumPhotosInput = document.getElementById("album_photos");
+        const photoUploadContainer = document.querySelector(".photo-upload-container");
+        const addPhotoPlaceholder = document.querySelector(".add-photo-placeholder");
+
+        function createPhotoPreviewItem(src, photoId = null) {
+            const div = document.createElement("div");
+            div.classList.add("photo-preview-item");
+
+            const img = document.createElement("img");
+            img.src = src;
+            img.classList.add("img-fluid", "rounded");
+
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.classList.add("btn-remove-photo");
+            if (photoId) {
+                removeButton.dataset.photoId = photoId;
+            }
+            removeButton.innerHTML = '<i class="bi bi-x"></i>';
+
+            removeButton.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                div.remove();
+            });
+
+            div.appendChild(img);
+            div.appendChild(removeButton);
+
+            return div;
+        }
+
+        if (albumPhotosInput) {
+            albumPhotosInput.addEventListener("change", (event) => {
+                const files = event.target.files;
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const newPhotoItem = createPhotoPreviewItem(e.target.result);
+                            photoUploadContainer.insertBefore(newPhotoItem, addPhotoPlaceholder);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+        }
+
+        photoUploadContainer.addEventListener('click', function(event) {
+            const clickedButton = event.target.closest('.btn-remove-photo');
+            if (clickedButton) {
+                event.stopPropagation(); 
+                const photoItem = clickedButton.closest('.photo-preview-item');
+                if (photoItem) {
+                    photoItem.remove();
+                    const photoId = clickedButton.dataset.photoId;
+                    if (photoId) {
+                        console.log(`Ảnh đã tồn tại với ID ${photoId} được xóa khỏi DOM. Cần xử lý xóa trên server.`);
+                    } else {
+                        console.log("Ảnh mới được xóa khỏi DOM.");
+                    }
+                }
+            }
+        });
+    });
+</script>
 </html>

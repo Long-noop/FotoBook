@@ -13,53 +13,46 @@
     <div class="container-fluid main-content px-4">
         <div class="row">
             <%= render 'users/sidebar'%>
-           <div class="col-lg-9">
+            <div class="col-lg-9">
                 <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-                    <div class="col col-lg-12">
-                    <div class="d-flex mb-4 justify-content-center">
-                        <div class="btn-group btn-group-tab" role="group" aria-label="Photo Album Tabs">
-                            <button type="button" class="btn active" id="photoTabBtn">PHOTO</button>
-                            <button type="button" class="btn" id="albumTabBtn">ALBUM</button>
-                        </div>
-                    </div>
-                </div>
-                <%if @photos.present?%>
-                    <% @photos.each do |photo|%>
-                        <div class="col">
-                            <div class="card-post d-flex">
-                                <div class="card-img-top">
-                                    <% if photo.featured_image.present? %>
-                                        <img src="<%= url_for(photo.featured_image.url) %>"
-                                        class="img-thumbnail-click"
-                                        alt="Post Image"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#imageModal"
-                                        data-image-src= "../assets/a5.jpeg">
-                                    <%end%>
-                                </div>
-                                <div class="card-body">
-                                    <div class="user-info">
-                                        <div class="user-avatar">
-                                            <% if photo.user.avatar.present? %>
-                                                <%= image_tag photo.user.avatar.url%>
-                                            <% else %>
-                                                <span> <%= photo.user.first_name.first.upcase %><%= photo.user.last_name.first.upcase %></span>
-                                            <% end %>
-                                        </div>
-                                        <h6 class="user-name mb-0"><%= photo.user.first_name %><%= photo.user.last_name%></h6>
+                    <%= render 'users/tab'%>
+                    <%if @photos.present?%>
+                        <% @photos.each do |photo|%>
+                            <div class="col">
+                                <div class="card-post d-flex">
+                                    <div class="card-img-top">
+                                        <% if photo.featured_image.present? %>
+                                            <img src="<%= url_for(photo.featured_image.url) %>"
+                                            class="img-thumbnail-click"
+                                            alt="Post Image"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#imageModal"
+                                            data-image-src= "<%= url_for(photo.featured_image.url) %>">
+                                        <%end%>
                                     </div>
-                                    <h6 class="img-title"><%= photo.title%></h6>
-                                    <p class="card-text"><%= photo.description%></p>    
-                                    <div class="post-actions">
-                                        <%= render partial: "users/likes/like_button", locals: { likeable: photo } %>
-                                        <span><%= photo.created_at.strftime("%H:%M %p %d/%m/%Y") %></span>
+                                    <div class="card-body">
+                                        <div class="user-info">
+                                            <div class="user-avatar">
+                                                <% if photo.user.avatar.present? %>
+                                                    <%= image_tag photo.user.avatar.url%>
+                                                <% else %>
+                                                    <span> <%= photo.user.first_name.first.upcase %><%= photo.user.last_name.first.upcase %></span>
+                                                <% end %>
+                                            </div>
+                                            <h6 class="user-name mb-0"><%= photo.user.first_name %><%= photo.user.last_name%></h6>
+                                        </div>
+                                        <h6 class="img-title"><%= photo.title%></h6>
+                                        <p class="card-text"><%= photo.description%></p>    
+                                        <div class="post-actions">
+                                            <%= render partial: "users/likes/like_button", locals: { likeable: photo } %>
+                                            <span><%= photo.created_at.strftime("%H:%M %p %d/%m/%Y") %></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <%end%>
                     <%end%>
-                <%end%>
-            </div>
+                </div>
 
                 <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
                     <ul class="pagination">
@@ -74,5 +67,30 @@
         </div>
     </div>
 
-    </body>
+    <%= render 'users/photos/image_modal' %>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('imageModalLabel');
+            const modalDescription = document.getElementById('modalDescription');
+
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                const triggerImage = event.relatedTarget;
+                const largeImageSrc = triggerImage.getAttribute('data-image-src');
+
+                modalImage.src = largeImageSrc;
+                
+                const cardPost = triggerImage.closest('.card-post');
+
+                const imgTitle = cardPost.querySelector('.card-body .img-title');
+                modalTitle.textContent = imgTitle.textContent;
+
+                const cardTextElement = cardPost.querySelector('.card-text');
+                modalDescription.textContent = cardTextElement.textContent;
+            });
+        });
+    </script>
+</body>
 </html>

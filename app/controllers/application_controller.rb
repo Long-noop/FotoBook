@@ -4,17 +4,15 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_out_path_for(resource_or_scope)
-    # new_user_session_path
     root_path
   end
 
   def after_sign_in_path_for(resource)
-    users_photos_path
-    # if resource.admin?
-    #   admin_dashboard_path
-    # else
-    #   photos_path
-    # end
+    if resource.admin?
+      admin_dashboard_photo_path
+    else
+      users_photos_path
+    end
   end
 
   protected

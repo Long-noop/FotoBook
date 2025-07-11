@@ -31,26 +31,26 @@
                             <div class="mt-1 d-flex align-items-center gap-3 profile-stats">
                                 <div class="tab photo-tab <%= 'active' if params[:tab] == 'photos' || params[:tab].blank? %>">
                                     <%= link_to users_profile_path(@user, tab: 'photos') do %>
-                                        <span class="count-number"><%= @user.photos.count %></span>
+                                        <span class="count-number"><%= @user.photos.size %></span>
                                         <span class="fw-bold count-label">PHOTOS</span>
                                     <% end %>
                                 </div>
 
                                 <div class="tab album-tab <%= 'active' if params[:tab] == 'albums' %>">
                                     <%= link_to users_profile_path(@user, tab: 'albums') do %>
-                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="count-number"><%= @user.albums.size %></span>
                                         <span class="fw-bold count-label">ALBUMS</span>
                                     <% end %>
                                 </div>
                                 <div class="tab album-tab <%= 'active' if params[:tab] == 'followings' %>">
                                     <%= link_to users_profile_path(@user, tab: 'followings') do %>
-                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="count-number"><%= @user.followings.size %></span>
                                         <span class="fw-bold count-label">FOLLOWINGS</span>
                                     <% end %>
                                 </div>
                                 <div class="tab album-tab <%= 'active' if params[:tab] == 'followers' %>">
                                     <%= link_to users_profile_path(@user, tab: 'followers') do %>
-                                        <span class="count-number"><%= @user.albums.count %></span>
+                                        <span class="count-number"><%= @user.followers.size %></span>
                                         <span class="fw-bold count-label">FOLLOWERS</span>
                                     <% end %>
                                 </div>

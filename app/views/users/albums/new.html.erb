@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag 'albums_new', media: 'all', data: { turbolinks: false } %>
-
 </head>
 <body>
     <%= render 'users/navbar'%>
@@ -44,15 +43,25 @@
                                             </div>
                                         </div>
                                         
-                                        <%= form.label :photos, for: "album_photos" do %>
-                                            <div class="photo-upload-container d-flex flex-wrap gap-4">
-                                                <label for="album_photos" class="add-photo-placeholder ">
-                                                    <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
-                                                </label>
-                                                <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]" %>
-                                            </div>
-                                        <% end %>
-                                    </div>
+                                        <div class="photo-upload-container d-flex flex-wrap gap-4">
+                                            <% if @album.photos.present? %>
+                                                <% @album.photos.each do |photo| %>
+                                                    <div class="photo-preview-item">
+                                                        <img src="<%= photo.featured_image.url %>" alt="Album Photo" class="img-fluid rounded">
+                                                        <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>">
+                                                            <i class="bi bi-x"></i>
+                                                        </button>
+                                                    </div>
+                                                <% end %>
+                                            <% end %>
+                                            
+                                            <label for="album_photos" class="add-photo-placeholder">
+                                                <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
+                                            </label>
+                                            
+                                            <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]" %>
+                                        </div>
+                                        </div>
                                 </div>
                                 <div class="d-flex gap-3 submit">
                                     <%= form.submit "Save", class: "btn btn-success" %>
@@ -67,56 +76,71 @@
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-    const albumPhotosInput = document.getElementById("album_photos");
-    const photoUploadContainer = document.querySelector(".photo-upload-container"); // Container chính
-    const addPhotoPlaceholder = document.querySelector(".add-photo-placeholder"); // Dấu cộng
+        const albumPhotosInput = document.getElementById("album_photos");
+        const photoUploadContainer = document.querySelector(".photo-upload-container");
+        const addPhotoPlaceholder = document.querySelector(".add-photo-placeholder");
 
-    albumPhotosInput.addEventListener("change", (event) => {
-        const files = event.target.files;
-
-        for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (file.type.startsWith('image/')) { // Đảm bảo là file ảnh
-            const reader = new FileReader();
-            reader.onload = function (e) {
-            const photoPreviewItem = document.createElement("div");
-            photoPreviewItem.classList.add("photo-preview-item");
+        function createPhotoPreviewItem(src, photoId = null) {
+            const div = document.createElement("div");
+            div.classList.add("photo-preview-item");
 
             const img = document.createElement("img");
-            img.src = e.target.result;
+            img.src = src;
+            img.classList.add("img-fluid", "rounded");
 
             const removeButton = document.createElement("button");
             removeButton.type = "button";
-            removeButton.classList.add("btn-remove-photo"); // Sử dụng lại class này
+            removeButton.classList.add("btn-remove-photo");
+            if (photoId) {
+                removeButton.dataset.photoId = photoId;
+            }
             removeButton.innerHTML = '<i class="bi bi-x"></i>';
 
             removeButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                photoPreviewItem.remove();
+                e.stopPropagation(); 
+                div.remove();
             });
 
-            photoPreviewItem.appendChild(img);
-            photoPreviewItem.appendChild(removeButton);
+            div.appendChild(img);
+            div.appendChild(removeButton);
 
-            // Chèn ảnh mới ngay TRƯỚC addPhotoPlaceholder
-            photoUploadContainer.insertBefore(photoPreviewItem, addPhotoPlaceholder);
-            };
-            reader.readAsDataURL(file);
+            return div;
         }
-        }
-    });
 
-    document.querySelectorAll('.btn-remove-photo').forEach(button => {
-        button.addEventListener('click', function(event) {
-        // event.stopPropagation();
-        const photoItem = button.closest('.photo-preview-item');
-        if (photoItem) {
-            photoItem.remove();
-            console.log("Ảnh đã tồn tại được xóa khỏi DOM.");
+        if (albumPhotosInput) {
+            albumPhotosInput.addEventListener("change", (event) => {
+                const files = event.target.files;
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const newPhotoItem = createPhotoPreviewItem(e.target.result);
+                            photoUploadContainer.insertBefore(newPhotoItem, addPhotoPlaceholder);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
         }
+
+        photoUploadContainer.addEventListener('click', function(event) {
+            const clickedButton = event.target.closest('.btn-remove-photo');
+            if (clickedButton) {
+                event.stopPropagation(); 
+                const photoItem = clickedButton.closest('.photo-preview-item');
+                if (photoItem) {
+                    photoItem.remove();
+                    const photoId = clickedButton.dataset.photoId;
+                    if (photoId) {
+                        console.log(`Ảnh đã tồn tại với ID ${photoId} được xóa khỏi DOM. Cần xử lý xóa trên server.`);
+                    } else {
+                        console.log("Ảnh mới được xóa khỏi DOM.");
+                    }
+                }
+            }
         });
-    });
-
     });
 </script>
 </html>

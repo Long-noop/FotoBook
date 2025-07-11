@@ -14,29 +14,25 @@
             <%= render 'users/sidebar'%>
             <div class="col-lg-9">
                 <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-                    <div class="col col-lg-12">
-                        <div class="d-flex mb-4 justify-content-center">
-                            <div class="btn-group btn-group-tab" role="group" aria-label="Photo Album Tabs">
-                                <button type="button" class="btn " id="photoTabBtn">PHOTO</button>
-                                <button type="button" class="btn active" id="albumTabBtn">ALBUM</button>
-                            </div>
-                        </div>
-                    </div>
+                    <%=render 'users/tab'%>
                     <% if @albums.present? %>
                         <% @albums.each do |album| %>
                             <div class="col">
                                 <div class="album-post">
+                                    
                                     <div class="album-thumbnail-stack"
-                                        data-bs-toggle="modal" data-bs-target="#albumImageModal">
-                                        <% first_photo = album.photos.last%>
-                                        <% if first_photo&.featured_image&.present? %>
-                                            <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img album-img-front"%>
-                                            <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img album-img-middle"%>
-                                            <%= image_tag first_photo.featured_image.url, class: "album-thumbnail-img album-img-back"%>
-                                        <%# <% else %>
-                                            <%# <%= image_tag ".png", class: "album-thumbnail-img album-img-front", alt: "No Image" %>
-                                        <% end %>
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#albumImageModal"
+                                        data-album-title="<%= album.title %>"
+                                        data-album-description="<%= album.description %>"
+                                        data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
+                                    <% if album.photos.any? %>
+                                        <%= image_tag album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-front" %>
+                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
+                                        <%= image_tag album.photos.second&.featured_image&.url || album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-back" %>
+                                    <% end %>
                                     </div>
+
                                 
                                     <div class="album-body">
                                         <div>
@@ -68,6 +64,7 @@
                             </div>   
                         <%end%>
                     <%end%>
+                    
                     <div id="loadingSpinner" class="loading-spinner-container">
                         <div class="loader">
                             <span></span>
@@ -113,5 +110,43 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const albumImageModal = document.getElementById('albumImageModal');
+        const albumModalImage = document.getElementById('albumModalImage');
+        const albumModalTitle = document.getElementById('albumImageModalLabel');
+        const albumModalDescription = document.getElementById('albumModalDescription');
+        const prevAlbumImageBtn = document.getElementById('prevAlbumImageBtn');
+        const nextAlbumImageBtn = document.getElementById('nextAlbumImageBtn');
+
+        let currentAlbumImages = [];
+        let currentImageIndex = 0;
+
+        albumImageModal.addEventListener('show.bs.modal', function(event) {
+           const triggerElement = event.relatedTarget;
+
+            const albumTitle = triggerElement.getAttribute('data-album-title');
+            const albumDescription = triggerElement.getAttribute('data-album-description');
+            const imagesJson = triggerElement.getAttribute('data-album-images');
+
+            try {
+                currentAlbumImages = JSON.parse(imagesJson);
+            } catch (e) {
+                currentAlbumImages = [];
+            }
+
+            currentImageIndex = 0;
+
+            albumModalTitle.textContent = albumTitle;
+            albumModalDescription.textContent = albumDescription;
+            albumModalImage.src = currentAlbumImages[currentImageIndex];
+
+            updateAlbumNavButtons();
+        })
+
+    });
+    </script>
+
 </body>
 </html>

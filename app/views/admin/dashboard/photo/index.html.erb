@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= stylesheet_link_tag 'admin_index', media: 'all', data: { turbolinks: false } %>
+    </head>
+    <body>
+
+    <%= render 'admin/navbar' %>
+
+
+    <div class="container-fluid main-content px-4">
+        <div class="row">
+            <%= render 'admin/sidebar'%>
+            <div class="col-lg-9">
+                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <%# <div class="col col-lg-12">
+                        <div class="d-flex mb-4 justify-content-center"> %>
+                            <%if @photos.present?%>
+                                <% @photos.each do |photo|%>
+                                    <div class="col d-flex justify-content-start">
+                                        <div class="card-post d-flex">
+                                            <div class="card-img-top">
+                                                <% if photo.featured_image.present? %>
+                                                    <img src="<%= url_for(photo.featured_image.url) %>"
+                                                    class="img-thumbnail-click"
+                                                    alt="Post Image"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#imageModal"
+                                                    data-image-src= "<%= url_for(photo.featured_image.url) %>">
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%end%>
+                            <%end%>
+                        <%# </div>
+                    </div> %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

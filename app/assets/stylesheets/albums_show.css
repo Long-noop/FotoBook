@@ -1,3 +1,4 @@
+
 body {
     background-color: #f0f2f5; 
     padding-top: 70px   ;
@@ -196,11 +197,20 @@ body {
     font-size: 13px;
 }
 
-.modal-body img {
+.album-modal-imag img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: auto; 
+    object-fit: cover;
+}
+
+.album-modal-image {
+  max-height: 75vh;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .btn-group-tab {

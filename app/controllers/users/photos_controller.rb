@@ -5,6 +5,7 @@ module Users
 
   def index
     @photos = Photo.where(mode: :public_mode)
+    @tab = "photo"
   end
 
   def show
@@ -28,7 +29,7 @@ module Users
 
   def update
     if @photo.update(photo_params)
-      redirect_to users_photos_path(@photo), notice: "Photo updated."
+      redirect_to users_profile_path, notice: "Photo updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +37,7 @@ module Users
 
   def destroy
     @photo.destroy
-    redirect_to users_photos_path, notice: "Photo deleted."
+    redirect_to users_profile_path, notice: "Photo deleted."
   end
 
   private
