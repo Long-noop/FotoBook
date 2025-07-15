@@ -12,9 +12,10 @@ class User < ApplicationRecord
   has_many :passive_follows, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
   has_many :followers, through: :passive_follows
 
-  enum :role, [ :user, :admin ], default: :user
+  enum :role, [ :regular_user, :admin ], default: :regular_user
   after_initialize :set_default_role, if: :new_record?
 
+  enum :status, [ :inactive, :active ], default: :active
 
   def liked?(likeable)
       likes.exists?(likeable: likeable)
@@ -22,6 +23,6 @@ class User < ApplicationRecord
 
   private
   def set_default_role
-    self.role ||= :user
+    self.role ||= :regular_user
   end
 end

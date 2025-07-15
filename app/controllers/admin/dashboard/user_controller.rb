@@ -1,7 +1,8 @@
 class Admin::Dashboard::UserController < ApplicationController
     before_action :authenticate_admin!
   def index
-    @users = User.all
+    # @users = User.all
+    @users = User.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   private

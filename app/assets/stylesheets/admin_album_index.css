@@ -58,12 +58,20 @@ body {
 .form-control {
     width: 600px;
 }
+
 .main-content {
     padding-top: 20px;
 }
+
 .main-workspace {
     background-color: white;
     margin-top: 20px;
+}
+
+.main-workspace img{
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
 }
 
 .album-post {

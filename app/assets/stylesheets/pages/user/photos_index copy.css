@@ -1,0 +1,77 @@
+.modal-body img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: auto; 
+    object-fit: cover;
+}
+
+.btn-group-tab {
+    border: 1px solid #4267b2; 
+    border-radius: 8px; 
+    overflow: hidden;
+}
+
+.btn-group-tab .btn {
+    background-color: white;
+    color: black; 
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease; 
+    border-radius: 0;
+}
+
+.btn-group-tab .btn:first-child {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.btn-group-tab .btn:last-child {
+    border-top-right-radius: 7px; 
+    border-bottom-right-radius: 7px; 
+}
+
+.btn-group-tab .btn.active {
+    background-color: #4267b2; 
+    color: white; 
+}
+
+.btn-group-tab .btn:hover:not(.active) {
+    background-color: #f0f2f5; 
+}
+
+.btn-group-tab .btn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+#modalDescription {
+    text-align: left;
+    padding-top: 20px;
+}
+
+.heart-button {
+    cursor: pointer; 
+    user-select: none;
+    border: none;
+    background: none;
+    display: flex;
+}
+
+.heart-button svg {
+    transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out; 
+}
+
+.heart-button svg.bi-heart {
+    fill: #6c757d; 
+}
+
+.heart-button.liked svg.bi-heart-fill {
+    fill: #4267b2; 
+    transform: scale(1.1); 
+}
+
+.heart-button.liked .heart-count {
+    color: #4267b2;
+}

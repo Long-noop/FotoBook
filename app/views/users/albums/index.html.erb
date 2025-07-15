@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= stylesheet_link_tag 'albums_show', media: 'all', data: { turbolinks: false } %>
+    <%= stylesheet_link_tag 'albums_index', media: 'all', data: { turbolinks: false } %>
 
 </head>
 <body>
@@ -19,21 +19,15 @@
                         <% @albums.each do |album| %>
                             <div class="col">
                                 <div class="album-post">
-                                    
-                                    <div class="album-thumbnail-stack"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#albumImageModal"
-                                        data-album-title="<%= album.title %>"
-                                        data-album-description="<%= album.description %>"
-                                        data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
-                                    <% if album.photos.any? %>
-                                        <%= image_tag album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-front" %>
-                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
-                                        <%= image_tag album.photos.second&.featured_image&.url || album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-back" %>
-                                    <% end %>
-                                    </div>
+                                    <turbo-frame id="album_modal"></turbo-frame>
 
-                                
+                                    <%= link_to users_album_path(album), data: { turbo_frame: "album_modal" }, class: "album-thumbnail-stack" do %>
+                                        <% if album.photos.any? %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-front" %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-back" %>
+                                        <% end %>
+                                    <%end%>   
                                     <div class="album-body">
                                         <div>
                                             <div class="user-info">
@@ -42,7 +36,7 @@
                                                         <% if album.user.avatar.present? %>
                                                             <%= image_tag album.user.avatar.url%>
                                                         <% else %>
-                                                            <span> <%= calbum.user.first_name.first.upcase %><%=album.user.last_name.first.upcase %></span>
+                                                            <span> <%= album.user.first_name.first.upcase %><%=album.user.last_name.first.upcase %></span>
                                                         <% end %>
                                                     </div>
                                                     <h6 class="user-name mb-0"><%=album.user.first_name %><%= album.user.last_name%></h6>
@@ -84,69 +78,5 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="albumImageModal" tabindex="-1" aria-labelledby="albumImageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl"> <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="albumImageModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <button class="btn btn-outline-secondary album-nav-btn" id="prevAlbumImageBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                            </svg>
-                        </button>
-                        <img src="" class="img-fluid album-modal-image" id="albumModalImage" alt="Image">
-                        <button class="btn btn-outline-secondary album-nav-btn" id="nextAlbumImageBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <p id="albumModalDescription" class="mt-3"></p>
-                </div>   
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const albumImageModal = document.getElementById('albumImageModal');
-        const albumModalImage = document.getElementById('albumModalImage');
-        const albumModalTitle = document.getElementById('albumImageModalLabel');
-        const albumModalDescription = document.getElementById('albumModalDescription');
-        const prevAlbumImageBtn = document.getElementById('prevAlbumImageBtn');
-        const nextAlbumImageBtn = document.getElementById('nextAlbumImageBtn');
-
-        let currentAlbumImages = [];
-        let currentImageIndex = 0;
-
-        albumImageModal.addEventListener('show.bs.modal', function(event) {
-           const triggerElement = event.relatedTarget;
-
-            const albumTitle = triggerElement.getAttribute('data-album-title');
-            const albumDescription = triggerElement.getAttribute('data-album-description');
-            const imagesJson = triggerElement.getAttribute('data-album-images');
-
-            try {
-                currentAlbumImages = JSON.parse(imagesJson);
-            } catch (e) {
-                currentAlbumImages = [];
-            }
-
-            currentImageIndex = 0;
-
-            albumModalTitle.textContent = albumTitle;
-            albumModalDescription.textContent = albumDescription;
-            albumModalImage.src = currentAlbumImages[currentImageIndex];
-
-            updateAlbumNavButtons();
-        })
-
-    });
-    </script>
-
 </body>
 </html>

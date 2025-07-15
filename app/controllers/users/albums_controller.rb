@@ -2,11 +2,18 @@ class Users::AlbumsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_album, only: [ :show, :edit, :update, :destroy ]
   def index
-    @albums = Album.where(mode: :public_mode)
+    followed_users = current_user.followings
+    @albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
+
+    @discovery_albums = Album.where(mode: :public_mode)
+                         .where.not(user: followed_users + [ current_user ])
+
     @tab = "album"
   end
 
   def show
+    @photos = @album.photos
+    render partial: "modal", locals: { album: @album, photos: @photos }
   end
 
   def new
@@ -86,7 +93,10 @@ class Users::AlbumsController < ApplicationController
 
   private
   def set_album
-    @album = current_user.albums.find(params[:id])
+    followed_users = current_user.followings
+    albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
+
+    @album = albums.find(params[:id])
   end
 
   def album_params

@@ -21,13 +21,11 @@
                             <div class="col">
                                 <div class="card-post d-flex">
                                     <div class="card-img-top">
-                                        <% if photo.featured_image.present? %>
-                                            <img src="<%= url_for(photo.featured_image.url) %>"
-                                            class="img-thumbnail-click"
-                                            alt="Post Image"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#imageModal"
-                                            data-image-src= "<%= url_for(photo.featured_image.url) %>">
+                                        <turbo-frame id="photo_modal"></turbo-frame>
+                                        <%= link_to users_photo_path(photo), data: { turbo_frame: "photo_modal" }, class: "img-thumbnail" do %>
+                                            <% if photo.featured_image.present? %>
+                                                <%= image_tag photo.featured_image.url, class: "img-thumbnail-click" %>
+                                            <%end%>
                                         <%end%>
                                     </div>
                                     <div class="card-body">
@@ -67,30 +65,5 @@
         </div>
     </div>
 
-    <%= render 'users/photos/image_modal' %>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const imageModal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('imageModalLabel');
-            const modalDescription = document.getElementById('modalDescription');
-
-            imageModal.addEventListener('show.bs.modal', function (event) {
-                const triggerImage = event.relatedTarget;
-                const largeImageSrc = triggerImage.getAttribute('data-image-src');
-
-                modalImage.src = largeImageSrc;
-                
-                const cardPost = triggerImage.closest('.card-post');
-
-                const imgTitle = cardPost.querySelector('.card-body .img-title');
-                modalTitle.textContent = imgTitle.textContent;
-
-                const cardTextElement = cardPost.querySelector('.card-text');
-                modalDescription.textContent = cardTextElement.textContent;
-            });
-        });
-    </script>
 </body>
 </html>

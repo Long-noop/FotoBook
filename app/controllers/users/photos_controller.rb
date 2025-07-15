@@ -1,14 +1,18 @@
 module Users
   class PhotosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_photo, only: %i[show edit update destroy]
+  before_action :set_photo, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @photos = Photo.where(mode: :public_mode)
+    followed_users = current_user.followings
+    @photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
+
+    @discovery_photos = Photo.where(mode: :public_mode).where.not(user: followed_users + [ current_user ])
     @tab = "photo"
   end
 
   def show
+    render partial: "modal", locals: { photo: @photo }
   end
 
   def new
@@ -43,7 +47,10 @@ module Users
   private
 
     def set_photo
-      @photo = current_user.photos.find(params[:id])
+      followed_users = current_user.followings
+      photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
+
+      @photo = photos.find(params[:id])
     end
 
     def photo_params

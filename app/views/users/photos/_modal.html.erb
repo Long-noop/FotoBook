@@ -1,0 +1,16 @@
+<turbo-frame id="photo_modal">
+<div class="modal fade show d-block" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-modal="true" style="background: rgba(0,0,0,0.7);" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= photo.title %></h5>
+        <%= link_to "x", users_photos_path, data: { action: "click->modal#close" } %>
+        </div>
+        <div class="modal-body text-center">
+          <%= image_tag photo.featured_image.url, class: "img-fluid" %>
+        </div>
+        <p class="m-2"><%= photo.description %></p>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get "dashboard/photo", to: "dashboard/photo#index"
     get "dashboard/album", to: "dashboard/album#index"
     get "dashboard/user", to: "dashboard/user#index"
+    get "dashboard/user/:id/edit", to: "dashboard/user#edit", as: "edit_user"
   end
   devise_for :users
 
