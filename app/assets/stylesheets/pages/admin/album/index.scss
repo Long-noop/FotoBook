@@ -1,0 +1,49 @@
+.album-post {
+  display: flex;
+  background-color: #e4e6eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+  margin-bottom: 20px;
+
+  .album-body {
+    flex: 1;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+  }
+}
+
+.album-thumbnail-stack {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+}
+
+.album-thumbnail-img {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border: 1px solid #e4e6eb;
+}
+
+.album-img-front {
+  z-index: 3;
+  transform: rotate(0deg);
+}
+
+.album-img-middle {
+  z-index: 2;
+  transform: rotate(5deg);
+}
+
+.album-img-back {
+  z-index: 1;
+  transform: rotate(10deg);
+}

@@ -1,30 +1,32 @@
 <div class="row g4">
     <% @users_following.each do |user|%>
-    <div class="col-md-3 m-4">
-        <div class="card text-center shadow-sm">
+    <div class="col-md-3">
+        <div class="user-card text-center shadow-sm">
             <% if user.avatar.present? %>
-                <%= image_tag user.avatar.url, class: "rounded-circle me-3", alt: "Avatar", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                <%= image_tag user.avatar.url, class: "rounded-circle following-avatar"%>
             <% else %>
-                <%= image_tag "plus_icon.png", class: "rounded-circle me-3", alt: "Avatar", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                <%= image_tag "default-avt.png", class: "rounded-circle following-avatar"%>
             <% end %>
             <div class="card-body">
-                <h6 class="mb-1"><%=user.first_name%><%=user.last_name%></h6>
-                <div class="text-primary mb-2">
-                    <div class="d-flex justify-content-between">
-                        <div class="photo-count me-3"> 
-                            <span class="fw-bold d-block count-number"><%=user.photos.count%></span> <span class="d-block count-label">PHOTOS</span>
-                        </div>
-                        <div class="album-count"> <span class="fw-bold d-block count-number"><%=user.albums.count%></span>
-                            <span class="d-block count-label">ALBUMS</span>
+                <%= link_to users_show_profile_path(user), class: "text-decoration-none" do%>
+                    <h6 class="mb-1"><%=user.first_name%><%=user.last_name%></h6>
+                    <div class="text-primary mb-2">
+                        <div class="d-flex justify-content-between">
+                            <div class="photo-count me-3"> 
+                                <span class="fw-bold d-block count-number"><%=user.photos.count%></span> <span class="d-block count-label">PHOTOS</span>
+                            </div>
+                            <div class="album-count"> <span class="fw-bold d-block count-number"><%=user.albums.count%></span>
+                                <span class="d-block count-label">ALBUMS</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <%end%>
                 <div class="card-body">
-                    <div class="is-following follow-btn">
-                        <p class="following-text follow-text-label">Follow</p>
-                    </div> 
+                    <div class="is-following follow-btn" data-controller="follow" data-action="click->follow#toggle">
+                        <p class="following-text follow-text-label" data-follow-target="label">Follow</p>
+                    </div>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
     <%end%>

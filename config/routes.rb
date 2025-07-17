@@ -11,12 +11,22 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :profile, only: [ :show, :edit, :update ]
+    get "profile/:id", to: "profiles#show_user_profile", as: "show_profile"
+
 
     resources :photos do
+      collection do
+        get :feed
+        get :discovery
+      end
       resource :like, only: [ :create, :destroy ], module: :photos
     end
 
     resources :albums do
+      collection do
+        get :feed
+        get :discovery
+      end
       resource :like, only: [ :create, :destroy ], module: :albums
     end
 

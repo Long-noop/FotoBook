@@ -1,82 +1,72 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= stylesheet_link_tag 'albums_index', media: 'all', data: { turbolinks: false } %>
+<% content_for :head_css do %>
+  <%= stylesheet_link_tag 'pages/users/albums/index' %>
+<% end %>
+<div class="container-fluid main-content px-4">
+    <div class="row">
+        <%= render 'shared/user_sidebar'%>
+        <div class="col-lg-9">
+            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                <%=render 'shared/tab'%>
+                <% if @albums.present? %>
+                    <% @albums.each do |album| %>
+                        <div class="col">
+                            <div class="album-post">
+                                <turbo-frame id="album_modal"></turbo-frame>
 
-</head>
-<body>
-    <%= render 'users/navbar'%>
-
-    <div class="container-fluid main-content px-4">
-        <div class="row">
-            <%= render 'users/sidebar'%>
-            <div class="col-lg-9">
-                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-                    <%=render 'users/tab'%>
-                    <% if @albums.present? %>
-                        <% @albums.each do |album| %>
-                            <div class="col">
-                                <div class="album-post">
-                                    <turbo-frame id="album_modal"></turbo-frame>
-
-                                    <%= link_to users_album_path(album), data: { turbo_frame: "album_modal" }, class: "album-thumbnail-stack" do %>
-                                        <% if album.photos.any? %>
-                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-front" %>
-                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
-                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-back" %>
-                                        <% end %>
-                                    <%end%>   
-                                    <div class="album-body">
-                                        <div>
-                                            <div class="user-info">
-                                                <div class="user-profile">
-                                                    <div class="user-avatar">
-                                                        <% if album.user.avatar.present? %>
-                                                            <%= image_tag album.user.avatar.url%>
-                                                        <% else %>
-                                                            <span> <%= album.user.first_name.first.upcase %><%=album.user.last_name.first.upcase %></span>
-                                                        <% end %>
-                                                    </div>
-                                                    <h6 class="user-name mb-0"><%=album.user.first_name %><%= album.user.last_name%></h6>
+                                <%= link_to users_album_path(album), data: { turbo_frame: "album_modal" }, class: "album-thumbnail-stack" do %>
+                                    <% if album.photos.any? %>
+                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-front" %>
+                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
+                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-back" %>
+                                    <% end %>
+                                <%end%>   
+                                <div class="album-body">
+                                    <div>
+                                        <div class="user-info">
+                                            <div class="user-profile">
+                                                <div class="user-avatar">
+                                                    <% if album.user.avatar.present? %>
+                                                        <%= image_tag album.user.avatar.url%>
+                                                    <% else %>
+                                                        <span> <%= album.user.first_name.first.upcase %><%=album.user.last_name.first.upcase %></span>
+                                                    <% end %>
                                                 </div>
-                                                <div class="is-following follow-btn" data-controller="follow" data-action="click->follow#toggle">
-                                                    <p class="following-text follow-text-label" data-follow-target="label">Follow</p>
-                                                </div>
-
+                                                <h6 class="user-name mb-0"><%=album.user.first_name %><%= album.user.last_name%></h6>
                                             </div>
-                                            <h6 class="album-title"><%= album.title%></h6>
-                                            <p class="album-text"><%= album.description%></p>                                
+                                            <div class="is-following follow-btn" data-controller="follow" data-action="click->follow#toggle">
+                                                <p class="following-text follow-text-label" data-follow-target="label">Follow</p>
+                                            </div>
+
                                         </div>
-                                        <div class="post-actions">
-                                            <%= render partial: "users/likes/like_button", locals: { likeable: album } %>
-                                            <span><%= album.created_at.strftime("%H:%M %p %d/%m/%Y") %></span>
-                                        </div>
+                                        <h6 class="album-title"><%= album.title%></h6>
+                                        <p class="album-text"><%= album.description%></p>                                
+                                    </div>
+                                    <div class="post-actions">
+                                        <%= render partial: "users/likes/like_button", locals: { likeable: album } %>
+                                        <span><%= album.created_at.strftime("%H:%M %p %d/%m/%Y") %></span>
                                     </div>
                                 </div>
-                            </div>   
-                        <%end%>
+                            </div>
+                        </div>   
                     <%end%>
-                    
-                    <div id="loadingSpinner" class="loading-spinner-container">
-                        <div class="loader">
-                            <span></span>
-                        </div>
-                    </div>              
-                </div>
-
-                <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+                <%end%>
+                
+                <div id="loadingSpinner" class="loading-spinner-container">
+                    <div class="loader">
+                        <span></span>
+                    </div>
+                </div>              
             </div>
+
+            <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
-</body>
-</html>
+</div>

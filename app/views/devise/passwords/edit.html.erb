@@ -1,6 +1,7 @@
   <%= form_with model: current_user, url: registration_path(current_user), method: :patch, local: true do |f| %>
   <div class="form-name mb-3">
-      <h5 class="mb-3">Password</h5>
+    <div class="form-label"></div>
+    <h5 class="mb-3">Password</h5>
   </div>
   
   <div class="input-field mb-3">
@@ -19,6 +20,7 @@
   </div>
 
   <div class="actions save-button">
+    <div class="form-label"></div>
     <%= f.submit "Save", class: "btn btn-success" %>
   </div>
 <% end %>

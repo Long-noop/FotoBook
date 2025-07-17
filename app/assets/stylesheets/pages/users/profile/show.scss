@@ -1,0 +1,379 @@
+.profile-avatar img {
+    width: 171px;
+    height: 171px;
+    object-fit: cover;
+}
+.btn.edit-profile {
+  background: #ffffff;
+  color: #4267b2;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.user-info .user-name {
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.card-body h6 {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.card-body .card-text {
+  overflow: auto;
+  font-size: 13px;
+}
+
+.modal-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.btn-group-tab {
+  border: 1px solid #4267b2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.btn-group-tab .btn {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 0;
+}
+
+.btn-group-tab .btn:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.btn-group-tab .btn:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.btn-group-tab .btn.active {
+  background-color: #4267b2;
+  color: white;
+}
+
+.btn-group-tab .btn:hover:not(.active) {
+  background-color: #f0f2f5;
+}
+
+.btn-group-tab .btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+#modalDescription {
+  text-align: left;
+  padding-top: 20px;
+}
+
+.heart-button {
+  cursor: pointer;
+  user-select: none;
+}
+
+.heart-button svg {
+  transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
+}
+
+.heart-button svg.bi-heart {
+  fill: #6c757d;
+}
+
+.heart-button.liked svg.bi-heart-fill {
+  fill: #4267b2;
+  transform: scale(1.1);
+}
+
+.heart-button.liked .heart-count {
+  color: #4267b2;
+}
+
+.card-thumbnail-stack {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+}
+
+.card-thumbnail-img,
+.album-thumbnail-img {
+  position: absolute;
+  width: 171px;
+  height: 171px;
+  object-fit: cover;
+  border: 1px solid #e4e6eb;
+}
+
+.card-img-front,
+.img-front {
+  z-index: 3;
+  transform: rotate(0deg);
+}
+
+.card-img-middle,
+.img-middle {
+  z-index: 2;
+  transform: rotate(5deg);
+}
+
+.card-img-back,
+.img-back {
+  z-index: 1;
+  transform: rotate(10deg);
+}
+
+.profile-workspace{
+  background-color: white;
+  padding: 20px;
+  .user-card {
+    padding: 0;
+    width: 100%;
+    height: 255px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    img.follower-avatar,
+    img.following-avatar{
+      width: 106px;
+      height: 106px;
+      object-fit: cover;
+      margin-top: 15px;
+    }
+  }
+  .photo-card {
+    padding: 0;
+    width: 185px;
+    height: 185px;
+    margin: auto;
+    position: relative;
+
+    img.user-avatar,
+    img.user-photos {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h6 {
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+  .add-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    button {
+      padding: 8px 10px;
+      border-radius: 25px;
+      background-color: #219653;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  .card-body {
+    .is-following {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      height: 20px;
+      border-radius: 10px;
+      border: 1px solid #ff7e5f;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active {
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+      }
+
+      .following-text {
+        font-weight: bold;
+        font-size: 0.8em;
+        margin: 0;
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        &.active {
+          color: white;
+          -webkit-background-clip: unset;
+          -webkit-text-fill-color: initial;
+          background-clip: unset;
+          background: none;
+        }
+      }
+    }
+  }  
+}
+.lock-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  color: #000000;
+
+  img {
+    width: 10px;
+    height: 14px;
+  }
+}
+
+.edit-button {
+  position: absolute;
+  width: 25px;
+  height: 15px;
+  font-size: 10px;
+  border-radius: 25%;
+  background-color: #33333366;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  bottom: 5px;
+  right: 5px;
+  color: #ffffff;
+}
+
+.photo-count,
+.album-count {
+  text-align: center;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.tab a {
+  text-decoration: none;
+  color: #828282;
+}
+
+.tab .count-number {
+  font-size: 1.5em;
+}
+
+.tab .count-label {
+  font-size: 0.5em;
+}
+
+.tab.active a {
+  font-weight: bold;
+  color: #4267b2;
+}
+
+.photo-count {
+  margin-left: 35px;
+}
+
+.album-count {
+  margin-right: 35px;
+}
+
+.count-number {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.count-label {
+  font-size: 0.8em;
+}
+
+.profile-stats > div:not(:last-child) {
+  border-right: 1px solid #ced4da;
+  padding-right: 1rem;
+}
+
+.photo-list p {
+  font-size: 13px;
+  margin: 5px;
+}
+
+.album-thumbnail-stack {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 255px;
+  background: none;
+}
+
+.album-thumbnail-stack .count {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background-color: #33333366;
+  z-index: 4;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.count .number {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.count .label {
+  display: block;
+  font-size: 0.8em;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.img-front-container {
+  position: relative;
+  width: 171px;
+  height: 171px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,16 @@
+<div class="col-lg-2 mb-4">
+    <div class="sidebar">
+        <ul class="nav user flex-column">
+            <li class="nav-item">
+                <%= link_to "Feeds", feed_users_photos_path, id: "feedField", class: "nav-link #{'active' if current_page?(feed_users_photos_path) || current_page?(feed_users_albums_path)}",
+                            "aria-current": (current_page?(feed_users_photos_path) || current_page?(feed_users_albums_path) ? "page" : nil) %>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Discover", discovery_users_photos_path, id: "discoverField", class: "nav-link #{'active' if current_page?(discovery_users_photos_path) || current_page?(discovery_users_albums_path)}",
+                            "aria-current": (current_page?(discovery_users_photos_path) || current_page?(discovery_users_albums_path) ? "page" : nil) %>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

@@ -1,44 +1,33 @@
-<!DOCTYPE html>
-<html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <%= stylesheet_link_tag 'admin_album_index', media: 'all', data: { turbolinks: false } %>
-    </head>
-    <body>
-
-    <%= render 'admin/navbar' %>
-
-
-    <div class="container-fluid main-content px-4">
-        <div class="row">
-            <%= render 'admin/sidebar'%>
-            <div class="col-lg-9">
-                <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                    <% if @albums.present? %>
-                        <% @albums.each do |album| %>
-                            <div class="col d-flex justify-content-start">
-                                <div class="album-post">
-                                    
-                                    <div class="album-thumbnail-stack"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#albumImageModal"
-                                        data-album-title="<%= album.title %>"
-                                        data-album-description="<%= album.description %>"
-                                        data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
-                                    <% if album.photos.any? %>
-                                        <%= image_tag album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-front" %>
-                                        <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
-                                        <%= image_tag album.photos.second&.featured_image&.url || album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-back" %>
-                                    <% end %>
-                                    </div>                        
-                                </div>
-                            </div>   
-                        <%end%>
+<% content_for :head_css do %>
+  <%= stylesheet_link_tag 'pages/admin/album/index' %>
+<% end %>
+<div class="container-fluid main-content px-4">
+    <div class="row">
+        <%= render 'shared/admin_sidebar'%>
+        <div class="col-lg-9">
+            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                <% if @albums.present? %>
+                    <% @albums.each do |album| %>
+                        <div class="col d-flex justify-content-start">
+                            <div class="album-post">
+                                
+                                <div class="album-thumbnail-stack"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#albumImageModal"
+                                    data-album-title="<%= album.title %>"
+                                    data-album-description="<%= album.description %>"
+                                    data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
+                                <% if album.photos.any? %>
+                                    <%= image_tag album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-front" %>
+                                    <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
+                                    <%= image_tag album.photos.second&.featured_image&.url || album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-back" %>
+                                <% end %>
+                                </div>                        
+                            </div>
+                        </div>   
                     <%end%>
-                </div>
+                <%end%>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>

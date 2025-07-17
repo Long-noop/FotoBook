@@ -1,0 +1,18 @@
+@import "components/navbar";
+@import "components/sidebar";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+  background-color: #f0f2f5;
+  padding-top: 70px;
+  font-family: "Outfit", sans-serif;
+}
+
+.main-content {
+  padding-top: 10px;
+}
+
+.main-workspace {
+  background-color: white;
+  margin-top: 5px;
+}

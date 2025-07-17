@@ -2,11 +2,11 @@
     <button><%= link_to 'Add Photo', new_users_photo_path %></button>
 </div>
 <div class="row g-4 photo-list">
-    <% @user.photos.each do |photo|%>
+    <% user.photos.each do |photo|%>
         <div class="col-md-3">
-            <div class="card shadow-sm">
+            <div class="photo-card">
                 <% if photo.featured_image.present? %>
-                    <%= image_tag photo.featured_image.url%>
+                    <%= image_tag photo.featured_image.url,  class: "user-photos"%>
                     <% if photo.private_mode?%>
                         <div class="lock-icon"> <img src="<%=asset_path('lock_icon.png')%>" alt=""></i></div>
                     <%end%>

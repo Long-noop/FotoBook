@@ -2,7 +2,7 @@
     <button><%= link_to 'Add Album', new_users_album_path %></button>
 </div>
 <div class="row g-4 album-list">
-    <% @user.albums.each do |album|%>
+    <% user.albums.each do |album|%>
         <div class="col-md-3 px-0">
             <div class="album-thumbnail-stack">
                 <div class="count">

@@ -5,11 +5,17 @@ export default class extends Controller {
   static targets = ["photoTab", "albumTab"]
 
   goToPhoto() {
-    Turbo.visit("/users/photos")
+    const currentPath = window.location.pathname;
+    const isDiscovery = currentPath.includes("discovery");
+    const path = isDiscovery ? "/users/photos/discovery" : "/users/photos/feed";
+    Turbo.visit(path);
   }
 
   goToAlbum() {
-    Turbo.visit("/users/albums")
+    const currentPath = window.location.pathname;
+    const isDiscovery = currentPath.includes("discovery");
+    const path = isDiscovery ? "/users/albums/discovery" : "/users/albums/feed";
+    Turbo.visit(path);
   }
 }
 

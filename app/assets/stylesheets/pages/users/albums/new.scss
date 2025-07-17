@@ -1,0 +1,126 @@
+.form-select {
+  width: 188px;
+  height: 32px;
+  border-radius: 0.25rem;
+}
+
+#photoDescription {
+  width: 440px;
+  height: 110px;
+  overflow-y: auto;
+  resize: vertical;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.main-content {
+  padding-top: 20px;
+}
+
+.edit-photo-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.new-item-workspace{
+  background-color: white;
+  padding: 20px;
+  .card {
+  border: none;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-top: 0;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 50px;
+
+    h2 {
+      font-size: 15px;
+    }
+
+    .btn {
+      background: #4267b2;
+      color: #ffffff;
+    }
+  }
+  .form-control {
+    width: 440px;
+    height: 32px;
+    border-radius: 0.25rem;
+
+    &.description {
+      height: 110px;
+      overflow-y: auto;
+      resize: vertical;
+    }
+  }
+}
+}
+
+.photo-upload-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-remove-photo {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  z-index: 10;
+}
+
+.add-photo-placeholder {
+  width: 180px;
+  height: 180px;
+  background: #f2f2f2;
+  color: #bdbdbd;
+  border: 2px dashed #bdbdbd;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #e8e8e8;
+  }
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.submit {
+  margin-top: 50px;
+}
+
+.photo-preview-item {
+  position: relative;
+  width: 180px;
+  height: 180px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

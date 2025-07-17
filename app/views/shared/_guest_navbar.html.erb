@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold col-lg-2 me-0 px-4" href="#">Fotobook</a>
+        <div class="d-flex justify-content-between w-100">
+            <form class="d-flex me-3">
+                <input class="form-control me-2" type="search" placeholder="Search Photo / Album" aria-label="Search">
+            </form>
+            <ul class="navbar-nav mb-2 mb-lg-0 col-lg-1">
+                <li class="nav-item">
+                    <%= link_to 'Login', new_user_session_path, class: "nav-link" %>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -10,6 +10,10 @@ class Users::ProfilesController < ApplicationController
     @users_following = current_user.followings
   end
 
+  def show_user_profile
+    @another_user = User.find(params[:id])
+  end
+
   def new
     @user = User.build
   end

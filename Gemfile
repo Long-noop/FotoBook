@@ -67,3 +67,5 @@ gem "devise"
 gem "carrierwave", "~> 3.0"
 
 gem "kaminari"
+
+gem "sassc-rails"
