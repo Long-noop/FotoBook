@@ -1,5 +1,5 @@
 <div class="row g4">
-    <% @users_follower.each do |user|%>
+    <% user.followers.each do |user|%>
     <div class="col-md-3">
         <div class="user-card text-center shadow-sm">
             <% if user.avatar.present? %>
@@ -8,7 +8,7 @@
                 <%= image_tag "default-avt.png", class: "rounded-circle follower-avatar"%>
             <% end %>
             <div class="card-body">
-                <%= link_to users_show_profile_path(user), class: "text-decoration-none" do%>
+                <%= link_to users_profile_path(user), class: "text-decoration-none" do%>
                     <h6 class="mb-1"><%=user.first_name%><%=user.last_name%></h6>
                     <div class="text-primary mb-2">
                         <div class="d-flex justify-content-between">

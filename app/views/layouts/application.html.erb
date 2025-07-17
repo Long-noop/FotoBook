@@ -24,7 +24,7 @@
 
   <body>
     <% if user_signed_in?%>
-      <%= render 'shared/navbar'%>
+      <%= render partial: 'shared/navbar'%>
     <%else%>
       <%= render 'shared/guest_navbar'%>
     <%end%>

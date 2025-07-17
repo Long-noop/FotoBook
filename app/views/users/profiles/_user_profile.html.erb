@@ -16,7 +16,7 @@
                         <div>
                             <div class="card-body">
                                 <% if current_user == user %>
-                                    <%= link_to 'Edit Profile', edit_users_profile_path, class: 'btn btn-primary edit-profile' %>
+                                    <%= link_to 'Edit Profile', edit_users_profile_path(user), class: 'btn btn-primary edit-profile' %>
                                 <% else %>
                                     <% follow_label = current_user.followings.include?(user) ? 'Following' : 'Follow' %>
                                     <div class="is-following follow-btn" data-controller="follow" data-action="click->follow#toggle">
@@ -60,9 +60,9 @@
                     <% when 'photos' %>
                         <%= render partial: 'users/profiles/tabs/photo', locals: {user: user}%>
                     <% when 'followers'%>
-                        <%= render partial: 'users/profiles/tabs/follower'%>
+                        <%= render partial: 'users/profiles/tabs/follower', locals: {user: user}%>
                     <% when 'followings'%>
-                        <%= render partial: 'users/profiles/tabs/following'%>
+                        <%= render partial: 'users/profiles/tabs/following', locals: {user: user}%>
                     <% else%>   
                         <%= render partial: 'users/profiles/tabs/photo', locals: {user: user}%>
                     <%end%>

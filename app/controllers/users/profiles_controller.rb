@@ -1,16 +1,13 @@
 class Users::ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_profile, only: [ :index, :show, :edit, :update, :destroy ]
 
   def index
+    @users_follower = @user.followers
+    @users_following = @user.followings
   end
 
   def show
-    @users_follower = current_user.followers
-    @users_following = current_user.followings
-  end
-
-  def show_user_profile
     @another_user = User.find(params[:id])
   end
 
@@ -49,6 +46,6 @@ class Users::ProfilesController < ApplicationController
   end
 
   def set_profile
-      @user = current_user
+    @user = User.find_by(id: params[:id]) || current_user
   end
 end

@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   root "homes#index"
 
   namespace :users do
-    resource :profile, only: [ :show, :edit, :update ]
-    get "profile/:id", to: "profiles#show_user_profile", as: "show_profile"
-
+    resources :profiles
 
     resources :photos do
       collection do
