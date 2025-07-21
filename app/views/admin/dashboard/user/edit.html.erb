@@ -1,34 +1,41 @@
 <% content_for :head_css do %>
-  <%= stylesheet_link_tag 'pages/admin/user/edit' %>
+  <%= stylesheet_link_tag 'pages/users/profile/edit' %>
 <% end %>
-<div class="container-fluid main-content px-4">
-    <div class="row">
-        <%= render 'shared/admin_sidebar'%>
-        <div class="col-lg-9">
-            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-                <div class="col col-lg-12">
-                    <div class="d-flex flex-column mb-4 justify-content-center"> 
-                        <h2 class="fw-bold">Edit User Profile</h2>
-                        <div class="card">
-                            <%= form_with model: current_user, url: users_profile_path, method: :patch, local: true, html: { multipart: true } do |f| %>
-                                <div class="avatar-upload-container text-center mb-4">
-                                    <% if current_user.avatar.present? %> 
-                                        <%= image_tag current_user.avatar.url, class: "profile-edit-avatar mb-3"%>
-                                    <% else %>
-                                        <%= image_tag 'plus_icon.png', alt: "User Avatar", class: "profile-edit-avatar mb-3" %>
-                                    <% end %>   
-                                    <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
-                                        <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
-                                        CHANGE
-                                        <%= f.file_field :avatar,
-                                            accept: "image/*",
-                                            class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
-                                            id: "avatar-input" %>
-                                        </button>
-                                    </label>
+    <div class="container-fluid main-content px-4">
+        <div class="row">
+            <%= render 'shared/user_sidebar'%>
+            <div class="col-lg-9 px-0 mb-0">
+                <div class="new-item-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 px-0 mb-0">
+                    <div class="col col-lg-12 d-flex flex-column">
+                        <div class="col-lg-12 mb-4 card-header">
+                        <h2 class="edit-photo-title">Edit User Profile</h2>
+                        <%= link_to "Back", admin_dashboard_user_index_path, class: "btn btn-dark back-button" %>
+                    </div>
+                    <div class="under"></div>
+                        <div class="card edit-profile">
+                            <%= form_with model: @user, url: admin_dashboard_user_path(@user), method: :patch, local: true, html: { multipart: true } do |f| %>
+                                <div class="form-name mb3">
+                                    <div class="form-label"></div>
+                                        <div class="avatar-upload-container text-center mb-4">
+                                        <% if @user.avatar.present? %> 
+                                            <%= image_tag @user.avatar.url, class: "profile-edit-avatar mb-3"%>
+                                        <% else %>
+                                            <%= image_tag 'default-avt.png', alt: "User Avatar", class: "profile-edit-avatar mb-3" %>
+                                        <% end %>   
+                                        <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
+                                            <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
+                                            CHANGE
+                                            <%= f.file_field :avatar,
+                                                accept: "image/*",
+                                                class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
+                                                id: "avatar-input" %>
+                                            </button>
+                                        </label>
+                                    </div>
                                 </div>
                             
                                 <div class="form-name mb-3">
+                                    <div class="form-label"></div>
                                     <h5 class="mb-3">Basic Information</h5>
                                 </div>
                                 <div class="input-field mb-3">
@@ -52,13 +59,16 @@
                                     <%= f.check_box :status, class: "form-check-input", id: "user_status" %>
                                 </div>
                                 <div class="actions save-button">
+                                    <div class="form-label"></div>
                                     <%= f.submit "Save", class: "btn btn-success" %>
                                 </div>
                             <%end%>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+</html>

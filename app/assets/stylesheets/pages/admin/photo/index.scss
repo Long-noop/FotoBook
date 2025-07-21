@@ -4,6 +4,10 @@
     background-color: white;
     padding: 20px;
     margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .card-post {
       background-color: #e4e6eb;
       border-radius: 8px;

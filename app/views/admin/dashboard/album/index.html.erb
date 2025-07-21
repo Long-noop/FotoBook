@@ -5,28 +5,33 @@
     <div class="row">
         <%= render 'shared/admin_sidebar'%>
         <div class="col-lg-9">
-            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                <% if @albums.present? %>
-                    <% @albums.each do |album| %>
-                        <div class="col d-flex justify-content-start">
-                            <div class="album-post">
-                                
-                                <div class="album-thumbnail-stack"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#albumImageModal"
-                                    data-album-title="<%= album.title %>"
-                                    data-album-description="<%= album.description %>"
-                                    data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
-                                <% if album.photos.any? %>
-                                    <%= image_tag album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-front" %>
-                                    <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
-                                    <%= image_tag album.photos.second&.featured_image&.url || album.photos.last.featured_image.url, class: "album-thumbnail-img album-img-back" %>
-                                <% end %>
-                                </div>                        
-                            </div>
-                        </div>   
+            <div class="admin-workspace ">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <% if @albums.present? %>
+                        <% @albums.each do |album| %>
+                            <div class="col d-flex justify-content-center">
+                                <div class="album-post">
+                                    <div class="album-thumbnail-stack"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#albumImageModal"
+                                        data-album-title="<%= album.title %>"
+                                        data-album-description="<%= album.description %>"
+                                        data-album-images="<%= album.photos.map { |p| url_for(p.featured_image.url) }.to_json %>">
+                                        <% if album.photos.any? %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-front" %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
+                                            <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-back" %>
+                                        <% end %>
+                                        <div class="album-title"><%=album.title%></div>
+                                    </div>                        
+                                </div>
+                            </div>   
+                        <%end%>
                     <%end%>
-                <%end%>
+                </div>
+                <div>
+                    <%= paginate @albums%>
+                </div>
             </div>
         </div>
     </div>

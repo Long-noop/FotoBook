@@ -4,7 +4,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   mount_uploader :avatar, FeaturedImageUploader
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
+
 
   has_many :active_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :active_follows
@@ -16,6 +18,20 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   enum :status, [ :inactive, :active ], default: :active
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data["email"]).first
+
+    unless user
+        user = User.create(
+          email: data["email"],
+          password: Devise.friendly_token[0, 20]
+        )
+    end
+    user
+  end
+
 
   def liked?(likeable)
       likes.exists?(likeable: likeable)

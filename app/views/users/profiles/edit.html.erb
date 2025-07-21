@@ -13,21 +13,24 @@
                     <div class="under"></div>
                         <div class="card edit-profile">
                             <%= form_with model: current_user, url: users_profile_path, method: :patch, local: true, html: { multipart: true } do |f| %>
-                                <div class="avatar-upload-container text-center mb-4">
-                                    <% if current_user.avatar.present? %> 
-                                        <%= image_tag current_user.avatar.url, class: "profile-edit-avatar mb-3"%>
-                                    <% else %>
-                                        <%= image_tag 'plus_icon.png', alt: "User Avatar", class: "profile-edit-avatar mb-3" %>
-                                    <% end %>   
-                                    <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
-                                         <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
-                                        CHANGE
-                                        <%= f.file_field :avatar,
-                                            accept: "image/*",
-                                            class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
-                                            id: "avatar-input" %>
-                                        </button>
-                                    </label>
+                                <div class="form-name mb3">
+                                    <div class="form-label"></div>
+                                        <div class="avatar-upload-container text-center mb-4">
+                                        <% if current_user.avatar.present? %> 
+                                            <%= image_tag current_user.avatar.url, class: "profile-edit-avatar mb-3"%>
+                                        <% else %>
+                                            <%= image_tag 'plus_icon.png', alt: "User Avatar", class: "profile-edit-avatar mb-3" %>
+                                        <% end %>   
+                                        <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
+                                            <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
+                                            CHANGE
+                                            <%= f.file_field :avatar,
+                                                accept: "image/*",
+                                                class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
+                                                id: "avatar-input" %>
+                                            </button>
+                                        </label>
+                                    </div>
                                 </div>
                             
                                 <div class="form-name mb-3">

@@ -1,7 +1,7 @@
 class Admin::Dashboard::AlbumController < ApplicationController
     before_action :authenticate_admin!
   def index
-    @albums= Album.all
+    @albums= Album.order(created_at: :desc).page(params[:page]).per(12)
   end
 
   private

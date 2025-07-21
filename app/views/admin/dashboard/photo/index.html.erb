@@ -5,30 +5,32 @@
     <div class="row">
         <%= render 'shared/admin_sidebar'%>
         <div class="col-lg-9">
-            <div class="admin-workspace row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                <%# <div class="col col-lg-12">
-                    <div class="d-flex mb-4 justify-content-center"> %>
-                        <%if @photos.present?%>
-                            <% @photos.each do |photo|%>
-                                <div class="col d-flex justify-content-start">
-                                    <div class="card-post d-flex">
-                                        <div class="card-img-top">
-                                            <% if photo.featured_image.present? %>
-                                                <img src="<%= url_for(photo.featured_image.url) %>"
-                                                class="img-thumbnail-click"
-                                                alt="Post Image"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#imageModal"
-                                                data-image-src= "<%= url_for(photo.featured_image.url) %>">
-                                            <%end%>
-                                        </div>
+            <div class="admin-workspace ">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <%if @photos.present?%>
+                        <% @photos.each do |photo|%>
+                            <div class="col d-flex justify-content-center">
+                                <div class="card-post d-flex">
+                                    <div class="card-img-top">
+                                        <% if photo.featured_image.present? %>
+                                            <img src="<%= url_for(photo.featured_image.url) %>"
+                                            class="img-thumbnail-click"
+                                            alt="Post Image"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#imageModal"
+                                            data-image-src= "<%= url_for(photo.featured_image.url) %>">
+                                        <%end%>
                                     </div>
                                 </div>
-                            <%end%>
+                            </div>
                         <%end%>
-                    <%# </div>
-                </div> %>
+                    <%end%>
+                </div>
+                <div class="paginate-bar">
+                    <%= paginate @photos%>
+                </div>
             </div>
+            
         </div>
     </div>
 </div>

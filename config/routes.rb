@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get "dashboard/photo", to: "dashboard/photo#index"
-    get "dashboard/album", to: "dashboard/album#index"
-    get "dashboard/user", to: "dashboard/user#index"
-    get "dashboard/user/:id/edit", to: "dashboard/user#edit", as: "edit_user"
+    namespace :dashboard do
+      resources :user, only: [ :index, :edit, :update, :destroy ]
+      resources :photo, only: [ :index, :edit, :update, :destroy ]
+      resources :album, only: [ :index, :edit, :update, :destroy ]
+    end
   end
-  devise_for :users
+
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
   root "homes#index"
 

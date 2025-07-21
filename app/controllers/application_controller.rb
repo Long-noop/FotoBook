@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.admin?
-      admin_dashboard_photo_path
+      admin_dashboard_photo_index_path
     else
       users_photos_path
     end

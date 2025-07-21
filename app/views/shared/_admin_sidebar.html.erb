@@ -2,16 +2,16 @@
     <div class="sidebar">
         <ul class="nav admin flex-column">
             <li class="nav-item">
-                <%= link_to "Manage Photos", admin_dashboard_photo_path, id: "photoField", class: "nav-link #{'active' if current_page?(admin_dashboard_photo_path)}",
-                            "aria-current": (current_page?(admin_dashboard_photo_path) ? "page" : nil) %>
+                <%= link_to "Manage Photos", admin_dashboard_photo_index_path, id: "photoField", class: "nav-link #{'active' if current_page?(admin_dashboard_photo_index_path)}",
+                            "aria-current": (current_page?(admin_dashboard_photo_index_path) ? "page" : nil) %>
             </li>
             <li class="nav-item">
-                <%= link_to "Manage Albums", admin_dashboard_album_path, id: "albumField", class: "nav-link #{'active' if current_page?(admin_dashboard_album_path)}",
-                            "aria-current": (current_page?(admin_dashboard_album_path) ? "page" : nil) %>
+                <%= link_to "Manage Albums", admin_dashboard_album_index_path, id: "albumField", class: "nav-link #{'active' if current_page?(admin_dashboard_album_index_path)}",
+                            "aria-current": (current_page?(admin_dashboard_album_index_path) ? "page" : nil) %>
             </li>
             <li class="nav-item">
-                <%= link_to "Manage Users", admin_dashboard_user_path, id: "userField", class: "nav-link #{'active' if current_page?(admin_dashboard_user_path)}",
-                            "aria-current": (current_page?(admin_dashboard_user_path) ? "page" : nil) %>
+                <%= link_to "Manage Users", admin_dashboard_user_index_path, id: "userField", class: "nav-link #{'active' if current_page?(admin_dashboard_user_index_path)}",
+                            "aria-current": (current_page?(admin_dashboard_user_index_path) ? "page" : nil) %>
             </li>
         </ul>
     </div>

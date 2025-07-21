@@ -17,6 +17,7 @@
 //= link pages/admin/photo/index.css
 //= link pages/admin/album/index.css
 //= link pages/admin/user/index.css
+//= link pages/admin/user/edit.css
 
 //= link pages/users/photos/index.css
 //= link pages/users/photos/new.css

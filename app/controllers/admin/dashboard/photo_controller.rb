@@ -1,7 +1,7 @@
 class Admin::Dashboard::PhotoController < ApplicationController
     before_action :authenticate_admin!
   def index
-    @photos = Photo.all
+    @photos = Photo.order(created_at: :desc).page(params[:page]).per(12)
   end
 
   private

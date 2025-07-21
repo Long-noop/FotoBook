@@ -5,35 +5,39 @@
     <div class="row">
         <%= render 'shared/admin_sidebar'%>
         <div class="col-lg-9">
-            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
-                <div class="col col-lg-12">
-                    <div class="d-flex flex-column mb-4 justify-content-center"> 
-                        <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Last login</th>
-                            <th></th>
-                            <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%@users.each do |user|%>
-                            <tr>
-                            <th scope="row"><%=user.first_name%></th>
-                            <th scope="row"><%=user.last_name%></th>
-                            <th scope="row"><%=user.email%></th>
-                            <th scope="row"><%=user.updated_at%></th>
-                            <th><%= link_to "Edit", admin_edit_user_path(user), class:"btn btn-success"%></th>
-                            <th><button class="btn btn-danger">Delete</button></th>
-                            </tr>
-                            <%end%>
-                        </tbody>
-                        </table>
-                        <%= paginate @users%>
+            <div class="admin-workspace">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+                    <div class="col col-lg-12">
+                        <div class="d-flex flex-column mb-4"> 
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Last login</th>
+                                <th></th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%@users.each do |user|%>
+                                <tr>
+                                <th scope="row"><%=user.first_name%></th>
+                                <th scope="row"><%=user.last_name%></th>
+                                <th scope="row"><%=user.email%></th>
+                                <th scope="row"><%=user.updated_at%></th>
+                                <th><%= link_to "Edit", edit_admin_dashboard_user_path(user), class:"btn btn-success"%></th>
+                                <th><button class="btn btn-danger">Delete</button></th>
+                                </tr>
+                                <%end%>
+                            </tbody>
+                            </table>
+                        </div>
                     </div>
+                </div>
+                <div class="paginate-bar">
+                    <%= paginate @users%>
                 </div>
             </div>
         </div>

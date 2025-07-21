@@ -69,3 +69,8 @@ gem "carrierwave", "~> 3.0"
 gem "kaminari"
 
 gem "sassc-rails"
+
+gem "omniauth"
+gem "omniauth-google-oauth2"
+
+gem "dotenv-rails", groups: [ :development, :test ]
