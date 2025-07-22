@@ -11,7 +11,7 @@
                         <% @albums.each do |album| %>
                             <div class="col d-flex justify-content-center">
                                 <div class="album-post">
-                                    <div class="album-thumbnail-stack"
+                                    <div class="album-stack"
                                         data-bs-toggle="modal"
                                         data-bs-target="#albumImageModal"
                                         data-album-title="<%= album.title %>"
@@ -22,7 +22,12 @@
                                             <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-middle" %>
                                             <%= image_tag album.photos.first.featured_image.url, class: "album-thumbnail-img album-img-back" %>
                                         <% end %>
-                                        <div class="album-title"><%=album.title%></div>
+                                        <div class="album-title">
+                                            <span class="album-title-text"><%= album.title %></span>
+                                            <%= link_to edit_admin_dashboard_album_path(album), class: "album-edit-btn ms-2", title: "Edit" do %>
+                                                <img src="<%= asset_path('edit-button.png') %>" alt="">
+                                            <% end %>
+                                        </div>
                                     </div>                        
                                 </div>
                             </div>   

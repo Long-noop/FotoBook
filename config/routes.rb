@@ -32,6 +32,15 @@ Rails.application.routes.draw do
       resource :like, only: [ :create, :destroy ], module: :albums
     end
 
-    resource :follows, only: [ :create, :destroy ]
+    # resource :follows, only: [ :create, :destroy ]
+  end
+
+  resources :users, only: [] do
+    scope module: :users do
+      member do
+        post :follow, to: "follows#create", as: :follow
+        delete :unfollow, to: "follows#destroy", as: :unfollow
+      end
+    end
   end
 end

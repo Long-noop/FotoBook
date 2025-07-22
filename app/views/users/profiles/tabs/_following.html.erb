@@ -22,9 +22,7 @@
                     </div>
                 <%end%>
                 <div class="card-body">
-                    <div class="is-following follow-btn" data-controller="follow" data-action="click->follow#toggle">
-                        <p class="following-text follow-text-label" data-follow-target="label">Follow</p>
-                    </div>
+                    <%= render partial: "shared/follow_button", locals: {user: user} %>
                 </div>
             </div>            
         </div>

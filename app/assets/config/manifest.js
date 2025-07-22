@@ -9,6 +9,7 @@
 //= link controllers/index.js
 //= link controllers/tab_controller.js
 //= link controllers/album_preview_controller.js
+//= link controllers/infinite_scroll_controller.js
 
 //= link pages/homes/index.css
 //= link pages/auth/sessions_new.css
@@ -21,9 +22,13 @@
 
 //= link pages/users/photos/index.css
 //= link pages/users/photos/new.css
+//= link pages/users/photos/edit.css
+
 
 //= link pages/users/albums/index.css
 //= link pages/users/albums/new.css
+//= link pages/users/albums/edit.css
+
 
 //= link pages/users/profile/show.css
 //= link pages/users/profile/edit.css

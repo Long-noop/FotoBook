@@ -209,6 +209,45 @@ a.img-thumbnail {
   }
 }
 
-a {
-  text-decoration: none;
+// a {
+//   text-decoration: none;
+// }
+
+
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 250px; 
+  position: relative;
+  z-index: 100;
+  .loader {
+    position: relative; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+
+    span {
+      width: 51px;
+      height: 51px;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      border: 6px dashed rgba(70, 66, 66, 0.733);
+      border-color: rgba(70, 66, 66, 0.733) rgba(39, 37, 37, 0.25) rgba(22, 20, 20, 0.35) rgba(2, 2, 2, 0.5);
+      box-sizing: border-box;
+      animation: rotation 2s linear infinite;
+    }
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
 }

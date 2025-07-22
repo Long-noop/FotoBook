@@ -1,0 +1,25 @@
+<%= turbo_frame_tag dom_id(user, :follow_button) do %>
+  <% is_following = current_user.followings.include?(user) %>
+
+  <div
+    class="follow-btn is-following <%= 'active' if is_following %>"
+    data-controller="follow"
+    data-action="click->follow#toggle">
+    
+    <% if is_following %>
+      <%= button_to "Following",
+          unfollow_user_path(user),
+          method: :delete,
+          data: { turbo_stream: true },
+          class: "following-text follow-text-label active",
+          form: { data: { turbo_frame: dom_id(user, :follow_button) } } %>
+    <% else %>
+      <%= button_to "Follow",
+          follow_user_path(user),
+          method: :post,
+          data: { turbo_stream: true },
+          class: "following-text follow-text-label",
+          form: { data: { turbo_frame: dom_id(user, :follow_button) } } %>
+    <% end %>
+  </div>
+<% end %>

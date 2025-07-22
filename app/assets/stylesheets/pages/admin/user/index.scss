@@ -4,11 +4,23 @@
     margin-top: 5px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    // align-items: center;
     padding: 5px;
+
     .paginate-bar{
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    table {
+      align-self: flex-start;
+      width: 100%;
+      tbody{
+        th{
+          font-weight: normal;
+        }
+      }
     }
   }
 }

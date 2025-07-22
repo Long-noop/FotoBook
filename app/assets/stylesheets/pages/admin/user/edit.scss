@@ -22,6 +22,41 @@
         color: #ffffff;
       }
     }
+
+    &.edit-profile {
+      max-width: 800px;
+      margin: 0 auto;
+      border: none;
+    }
+
+    .avatar-upload-container {
+      position: relative;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-edit-avatar {
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .change-avatar-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      padding-bottom: 25px;
+
+      .btn {
+        font-size: 0.8em;
+        font-weight: bold;
+        color: black;
+        background: #fff;
+        opacity: 0.7;
+      }
+    }
     
     .form-control {
       width: 269px;
@@ -33,100 +68,70 @@
         resize: vertical;
       }
     }
+
+    .input-field {
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    .form-name {
+      width: 500px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+
+      h5 {
+        color: #3c5999;
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .form-label {
+      min-width: 200px;
+      font-weight: bold;
+      color: #555;
+      text-align: right;
+    }
+
+    .save-button {
+      width: 500px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+
+      &:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+    }
+
+    hr.my-5 {
+      border-top: 1px solid #dee2e6;
+    }
+
+    img {
+      width: 125px;
+      height: 125px;
+      object-fit: cover;
+    }
   }
-  img {
-    width: 125px;
-    height: 125px;
-    object-fit: cover;
-  }
-}
 
-.edit-photo-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.card.edit-profile {
-  max-width: 800px;
-  margin: 0 auto;
-  border: none;
-}
-
-.card .input-field {
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-}
-
-.avatar-upload-container {
-  position: relative;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.profile-edit-avatar {
-  border-radius: 15px;
-  object-fit: cover;
-}
-
-.change-avatar-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  text-align: center;
-  padding-bottom: 25px;
-
-  .btn {
-    font-size: 0.8em;
-    font-weight: bold;
-    color: black;
-    background: #fff;
-    opacity: 0.7;
-  }
-}
-
-.form-name {
-  width: 500px;
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-
-  h5 {
-    color: #3c5999;
+  .edit-photo-title {
+    font-size: 1.5rem;
     font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 1rem;
+    color: #333;
+    margin: 0;
   }
 }
 
-.form-label {
-  min-width: 200px;
-  font-weight: bold;
-  color: #555;
-  text-align: right;
-}
 
-.save-button {
-  width: 500px;
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-}
 
-.btn-success {
-  background-color: #28a745;
-  border-color: #28a745;
 
-  &:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-  }
-}
-
-hr.my-5 {
-  border-top: 1px solid #dee2e6;
-}

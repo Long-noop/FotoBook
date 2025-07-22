@@ -6,29 +6,37 @@
                 <form class="d-flex me-3">
                     <input class="form-control me-2 search-bar" type="search" placeholder="Search Photo / Album" aria-label="Search">
                 </form>
-                <ul class="navbar-nav mb-2 mb-lg-0 col-lg-3">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <% if current_user%>
-                                <% if current_user.avatar.present? %>
-                                    <%= image_tag current_user.avatar.url, class: "user-avatar-nav me-2", style: "width: 24px; height: 24px; border-radius: 50%; object-fit: cover;" %>
-                                <% else %>
-                                    <span class="user-avatar-nav me-2" style="background-color: white; color: #4267b2; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8em;">
-                                    <%= current_user.first_name.first.upcase %><%= current_user.last_name.first.upcase %>
-                                    </span>
-                                <% end %>
-                                <%= current_user.first_name %> <%= current_user.last_name %>
-                            <%end%>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><%= link_to "Profile", users_profiles_path, class: "dropdown-item" %></li>
-                            <li><%= link_to "Settings", edit_users_profile_path(current_user), class: "dropdown-item" %></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
-                    </li>
-                </ul>
+                <%if user_signed_in?%>
+                    <ul class="navbar-nav mb-2 mb-lg-0 col-lg-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <% if current_user%>
+                                    <% if current_user.avatar.present? %>
+                                        <%= image_tag current_user.avatar.url, class: "user-avatar-nav me-2"%>
+                                    <% else %>
+                                        <span class="user-avatar-nav not_attached me-2">
+                                        <%= current_user.first_name.first.upcase %><%= current_user.last_name.first.upcase %>
+                                        </span>
+                                    <% end %>
+                                    <%= current_user.first_name %> <%= current_user.last_name %>
+                                <%end%>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><%= link_to "Profile", users_profiles_path, class: "dropdown-item" %></li>
+                                <li><%= link_to "Settings", edit_users_profile_path(current_user), class: "dropdown-item" %></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+                        </li>
+                    </ul>
+                <%else%>
+                    <ul class="navbar-nav mb-2 mb-lg-0 col-lg-1">
+                        <li class="nav-item">
+                            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+                        </li>
+                    </ul>
+                <%end%>
             </div>
         </div>
     </nav>

@@ -1,15 +1,26 @@
 class Users::FollowsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
 
   def create
-    user = User.find(params[:following_id])
-    current_user.followings << user unless current_user.followings.include?(user)
-    redirect_to user
+    current_user.follow(@user)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @user }
+    end
   end
 
   def destroy
-    user = Follow.find(params[:id]).following
-    current_user.followings.destroy(user)
-    redirect_to user
+    current_user.unfollow(@user)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @user }
+    end
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

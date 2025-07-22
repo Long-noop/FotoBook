@@ -23,11 +23,7 @@
   </head>
 
   <body>
-    <% if user_signed_in?%>
-      <%= render partial: 'shared/navbar'%>
-    <%else%>
-      <%= render 'shared/guest_navbar'%>
-    <%end%>
+    <%= render partial: 'shared/navbar'%>
     <%= yield %>
   </body>
 </html>

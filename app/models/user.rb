@@ -37,6 +37,14 @@ class User < ApplicationRecord
       likes.exists?(likeable: likeable)
   end
 
+  def follow(other_user)
+    followings << other_user unless self == other_user || followings.include?(other_user)
+  end
+
+  def unfollow(other_user)
+    followings.delete(other_user)
+  end
+
   private
   def set_default_role
     self.role ||= :regular_user

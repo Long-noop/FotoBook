@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     padding: 20px;
 
     .album-post {
@@ -16,7 +16,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
       margin-bottom: 20px;
 
-      .album-thumbnail-stack {
+      .album-stack {
         flex: 1;
         position: relative;
         display: flex;
@@ -24,6 +24,7 @@
         justify-content: center;
         height: 200px;
         width: 200px;
+        margin: 0;
 
         .album-title{
           position: absolute;
@@ -32,10 +33,30 @@
           background: #000000;
           color: #FFFFFF;
           width: 100%;
+          height: 24px;
           display: flex;
           justify-content: center;
           align-items: center;
           opacity: 50%;
+          .album-title-text {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+          }
+
+          .album-edit-btn {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
         }
         
         .album-thumbnail-img {

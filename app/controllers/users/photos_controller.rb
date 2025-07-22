@@ -6,8 +6,16 @@ module Users
     before_action :set_discovery_photos, only: [ :discovery ]
 
     def index
-      @photos = Photo.where(mode: :public_mode)
-      @tab = "photo"
+      page_limit = 8
+      @current_page = params[:page].to_i
+
+      @photos = Photo.offset(page_limit*@current_page).limit(page_limit)
+      @next_page = @current_page + 1 if Photo.all.count > page_limit*@current_page + page_limit
+
+      respond_to do |format|
+        format.html
+        format.turbo_stream
+      end
     end
 
     def feed
@@ -35,7 +43,8 @@ module Users
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @photo.update(photo_params)

@@ -20,6 +20,12 @@
                                             data-bs-target="#imageModal"
                                             data-image-src= "<%= url_for(photo.featured_image.url) %>">
                                         <%end%>
+                                        <div class="photo-title">
+                                            <span class="photo-title-text"><%= photo.title %></span>
+                                            <%= link_to edit_admin_dashboard_photo_path(photo), class: "photo-edit-btn ms-2", title: "Edit" do %>
+                                                <img src="<%= asset_path('edit-button.png') %>" alt="">
+                                            <% end %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

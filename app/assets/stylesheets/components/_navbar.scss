@@ -5,38 +5,36 @@
   top: 0;
   z-index: 100;
 
-  .navbar-brand,
-  .nav-link,
-  .btn {
-    color: white;.navbar-custom {
-    background-color: #4267b2 !important;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100; 
-}
-.navbar-custom .navbar-brand,
-.navbar-custom .nav-link,
-.navbar-custom .btn {
-    color: white;
-    font-weight: bold;
-}
-.navbar-custom .navbar-brand {
-    text-align: end;
-}
-.navbar-nav {
-    display: flex;
-    gap: 40px;
-}
-    font-weight: bold;
-  }
-
   .navbar-brand {
     text-align: end;
+    color: #FFFFFF;
   }
-}
 
-.navbar-nav {
-  display: flex;
-  gap: 40px;
+  .navbar-nav {
+    display: flex;
+    gap: 40px;
+    font-weight: bold;
+
+    .user-avatar-nav{
+      width: 24px; 
+      height: 24px; 
+      border-radius: 50%; 
+      object-fit: cover;
+      &.not_attached{
+        background-color: white; 
+        color: #4267b2; 
+        display: inline-flex; 
+        justify-content: center; 
+        align-items: center; 
+        font-size: 0.8em;
+      }
+    }
+    .nav-link{
+      color: #FFFFFF;
+    }
+  }
+
+  .form-control.search-bar {
+    width: 600px;
+  }
 }
