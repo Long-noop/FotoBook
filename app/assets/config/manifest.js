@@ -9,11 +9,12 @@
 //= link controllers/index.js
 //= link controllers/tab_controller.js
 //= link controllers/album_preview_controller.js
-//= link controllers/infinite_scroll_controller.js
 
 //= link pages/homes/index.css
 //= link pages/auth/sessions_new.css
 //= link pages/auth/registrations_new.css
+
+//= link components/tab.css
 
 //= link pages/admin/photo/index.css
 //= link pages/admin/album/index.css

@@ -6,9 +6,8 @@
         <div class="col-lg-2 mb-4">
             <div class="sidebar"></div>
         </div>
-
         <div class="col-lg-9">
-            <div class="homepage row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
                 <%= render 'shared/tab'%>
                 <%if @photos.present?%>
                     <% @photos.each do |photo|%>

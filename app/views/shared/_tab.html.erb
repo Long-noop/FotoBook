@@ -1,8 +1,11 @@
+<% content_for :head_css do %>
+  <%= stylesheet_link_tag 'components/tab' %>
+<% end %>
 <div class="col col-lg-12">
     <div class="d-flex mb-4 justify-content-center">
         <div class="btn-group btn-group-tab" role="group" aria-label="Photo Album Tabs" data-controller="tab">
             <button type="button" 
-            class="btn <%= 'active' if @tab == 'photo' %>"
+            class="btn <%= 'active' if @tab == 'photo' || !user_signed_in? %>"
             id="photoTabBtn" data-tab-target="photoTab" data-action="click->tab#goToPhoto">PHOTO</button>
             <button type="button" 
             class="btn <%= 'active' if @tab == 'album' %>"

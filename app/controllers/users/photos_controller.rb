@@ -61,9 +61,10 @@ module Users
 
     private
       def set_photo
-        followed_users = current_user.followings
-        photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
-        @photo = photos.find(params[:id])
+        # followed_users = current_user.followings
+        # photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
+        # @photo = photos.find(params[:id])
+        @photo = current_user.photos.find(params[:id])
       end
 
       def set_feed_photos
