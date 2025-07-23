@@ -1,3 +1,6 @@
+<% content_for :head_css do %>
+  <%= stylesheet_link_tag 'components/modal' %>
+<% end %>
 <turbo-frame id="album_modal">
 <div class="modal fade show d-block" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-modal="true" style="background: rgba(0,0,0,0.7);" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">

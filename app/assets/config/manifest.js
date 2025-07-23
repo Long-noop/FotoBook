@@ -2,6 +2,7 @@
 //= link_directory ../javascripts .js
 //= link_directory ../stylesheets .css
 
+
 //= link application.js
 //= link controllers/application.js
 //= link controllers/follow_controller.js
@@ -15,6 +16,7 @@
 //= link pages/auth/registrations_new.css
 
 //= link components/tab.css
+//= link components/modal.css
 
 //= link pages/admin/photo/index.css
 //= link pages/admin/album/index.css

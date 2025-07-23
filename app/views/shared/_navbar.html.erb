@@ -15,7 +15,9 @@
                                         <%= image_tag current_user.avatar.url, class: "user-avatar-nav me-2"%>
                                     <% else %>
                                         <span class="user-avatar-nav not_attached me-2">
-                                        <%= current_user.first_name.first.upcase %><%= current_user.last_name.first.upcase %>
+                                        <%if current_user.first_name?%>
+                                            <%= current_user.first_name.first.upcase %><%= current_user.last_name.first.upcase %>
+                                        <%end%>
                                         </span>
                                     <% end %>
                                     <%= current_user.first_name %> <%= current_user.last_name %>

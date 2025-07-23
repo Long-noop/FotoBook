@@ -57,9 +57,10 @@ class Users::AlbumsController < ApplicationController
   private
 
     def set_album
-      followed_users = current_user.followings
-      albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
-      @album = albums.find(params[:id])
+      # followed_users = current_user.followings
+      # albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
+      # @album = albums.find(params[:id])
+      @album = current_user.albums.find(params[:id])
     end
 
     def set_feed_albums

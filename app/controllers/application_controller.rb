@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if resource.admin?
       admin_dashboard_photo_index_path
     else
-      users_photos_path
+      feed_users_photos_path
     end
   end
 

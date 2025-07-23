@@ -1,6 +1,6 @@
-    <% content_for :head_css do %>
-    <%= stylesheet_link_tag 'pages/auth/registrations_new' %>
-    <% end %>
+<% content_for :head_css do %>
+<%= stylesheet_link_tag 'pages/auth/registrations_new' %>
+<% end %>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold col-lg-2" href="#">Fotobook</a>
@@ -17,8 +17,8 @@
         </div>
     </nav>
         <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                <h2 class="text-center mb-4 login-title text-muted">Fotobook Signup</h2>
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 signup-form">
+                <h2 class="text-center mb-4 signup-title text-muted">Fotobook Signup</h2>
 
                 <div class="card p-3 mb-3 shadow-sm social-login-card">
                     <div class="d-flex justify-content-around">
@@ -74,10 +74,6 @@
                     <div class="text-center mt-3">
                     <%= link_to "Already have an account? Log in", new_session_path(resource_name), class: "text-decoration-none" %>
                     </div>
-
-                </div>
-                <div class="text-center mt-3">
-                    Already have an account? <a href="../login/login.html" class="text-decoration-none">Login here</a>
                 </div>
             </div>
         </div>
