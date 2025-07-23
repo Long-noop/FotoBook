@@ -26,7 +26,9 @@ default: &default
 
 development:
   <<: *default
-  database: fotobook_development
+  url: <%= ENV["DATABASE_URL"] %>
+
+  # database: fotobook_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -79,6 +81,11 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
+
+  cable:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
