@@ -1,8 +1,8 @@
 databases:
-  - name: Fotobook-pgSQL
-    databaseName: fotobook_q6qs         
-    user: root             
-    plan: free       
+  # - name: Fotobook-pgSQL
+  #   databaseName: fotobook_q6qs         
+  #   user: root             
+  #   plan: free       
 
 services:
   - type: web
