@@ -31,7 +31,7 @@
                                                 <div class="user-avatar">
                                                     <% if album.user.avatar.present? %>
                                                         <%= image_tag album.user.avatar.url%>
-                                                    <% else %>
+                                                    <% elsif album.user.first_name? %>
                                                         <span> <%= album.user.first_name.first.upcase %><%=album.user.last_name.first.upcase %></span>
                                                     <% end %>
                                                 </div>

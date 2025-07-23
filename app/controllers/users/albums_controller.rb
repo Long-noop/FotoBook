@@ -31,7 +31,7 @@ class Users::AlbumsController < ApplicationController
 
     if @album.save
       attach_photos_to_album(@album, params[:album][:photos])
-      redirect_to users_profile_path, notice: "Album created successfully."
+      redirect_to users_profiles_path, notice: "Album created successfully."
     else
       render :new, status: :unprocessable_entity
     end
