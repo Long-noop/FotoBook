@@ -37,7 +37,7 @@ module Users
     def create
       @photo = current_user.photos.build(photo_params)
       if @photo.save
-        redirect_to users_profile_path, notice: "Photo created successfully."
+        redirect_to users_profiles_path, notice: "Photo created successfully."
       else
         render :new, status: :unprocessable_entity
       end
