@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get :feed
         get :discovery
+        get :close_modal
       end
       resource :like, only: [ :create, :destroy ], module: :photos
     end
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       collection do
         get :feed
         get :discovery
+        get :close_modal
       end
       resource :like, only: [ :create, :destroy ], module: :albums
     end

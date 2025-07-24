@@ -7,7 +7,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"><%= album.title %></h5>
-        <%= link_to "x", users_albums_path, data: { action: "click->modal#close" } %>
+          <%= link_to "X", close_modal_users_albums_path, data: { turbo_frame: "album_modal" }%>
       </div>
       <div class="modal-body">
         <div id="carouselAlbumModal" class="carousel slide" data-bs-ride="carousel">

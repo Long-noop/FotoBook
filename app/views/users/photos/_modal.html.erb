@@ -8,7 +8,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title"><%= photo.title %></h5>
-        <%= link_to "x", users_photos_path, data: { action: "click->modal#close" } %>
+          <%= link_to "X", close_modal_users_photos_path, data: { turbo_frame: "photo_modal" }%>
         </div>
         <div class="modal-body text-center">
           <%= image_tag photo.featured_image.url, class: "img-fluid" %>

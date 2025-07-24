@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(user, :follow_button) do %>
-  <% is_following = current_user.followings.include?(user) %>
+  <% is_following = user_signed_in? ? current_user.followings.include?(user) : false %>
 
   <div
     class="follow-btn is-following <%= 'active' if is_following %>"

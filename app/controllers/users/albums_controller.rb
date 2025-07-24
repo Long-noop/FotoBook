@@ -22,6 +22,10 @@ class Users::AlbumsController < ApplicationController
     render partial: "modal", locals: { album: @album, photos: @photos }
   end
 
+  def close_modal
+      render turbo_stream: turbo_stream.update("album_modal", "")
+  end
+
   def new
     @album = current_user.albums.build
   end
@@ -60,7 +64,7 @@ class Users::AlbumsController < ApplicationController
       # followed_users = current_user.followings
       # albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
       # @album = albums.find(params[:id])
-      @album = current_user.albums.find(params[:id])
+      @album = Album.find(params[:id])
     end
 
     def set_feed_albums
