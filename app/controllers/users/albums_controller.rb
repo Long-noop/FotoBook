@@ -47,7 +47,7 @@ class Users::AlbumsController < ApplicationController
   def update
     if @album.update(album_params)
       attach_photos_to_album(@album, params[:album][:photos])
-      redirect_to users_profile_path, notice: "Album updated successfully."
+      redirect_to users_profiles_path, notice: "Album updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class Users::AlbumsController < ApplicationController
 
   def destroy
     @album.destroy
-    redirect_to users_profile_path, notice: "Album deleted successfully."
+    redirect_to users_profiles_path, notice: "Album deleted successfully."
   end
 
   private
