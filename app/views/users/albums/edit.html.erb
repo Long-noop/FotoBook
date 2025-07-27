@@ -1,19 +1,20 @@
 <% content_for :head_css do %>
-  <%= stylesheet_link_tag 'pages/users/albums/edit' %>
+  <%= stylesheet_link_tag 'pages/users/albums/new' %>
 <% end %>
+
 <div class="container-fluid main-content px-4">
     <div class="row">
         <%= render 'shared/user_sidebar'%>
         <div class="col-lg-9 px-0 mb-0">
-            <div class="main-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 px-0 mb-0">
+            <div class="new-item-workspace row row-cols-1 row-cols-md-2 row-cols-lg-2 px-0 mb-0">
                 <div class="col col-lg-12 d-flex flex-column">
                     <div class="col-lg-12 mb-4 card-header">
-                        <h2 class="edit-photo-title">Edit Album</h2>
+                        <h2 class="edit-photo-title">Add Album</h2>
                         <%= link_to "Back", users_albums_path, class: "btn btn-dark back-button" %>
                     </div>
                     <div class="under"></div>
-                        <div class="card p-4">
-                        <%= form_with model: @album, url: users_album_path(@album), method: :patch, local: true, html: { multipart: true } do |form| %>
+                    <div class="card p-4">
+                        <%= form_with model: @album, url: users_album_path(@album), local: true, method: :patch, html: { multipart: true } do |form| %>
                             <div>
                                 <div class="g-4">
                                     <div class="d-flex justify-content-between">
@@ -27,7 +28,7 @@
                                                 <%= form.select :mode, [
                                                     ['Public', 'public_mode'],
                                                     ['Private', 'private_mode'],
-                                                    ], {}, { class: "form-select" } %>
+                                                    ], { selected: 'public_mode' }, { class: "form-select" } %>
                                             </div>
                                         </div>
                                         <div class="mb-3">
@@ -36,12 +37,12 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="photo-upload-container d-flex flex-wrap gap-4">
+                                    <div class="photo-upload-container d-flex flex-wrap gap-4" data-controller="album-preview" data-album-preview-target="container">
                                         <% if @album.photos.present? %>
                                             <% @album.photos.each do |photo| %>
                                                 <div class="photo-preview-item">
                                                     <img src="<%= photo.featured_image.url %>" alt="Album Photo" class="img-fluid rounded">
-                                                    <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>">
+                                                    <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>" data-action="click->album-preview#remove">
                                                         <i class="bi bi-x"></i>
                                                     </button>
                                                 </div>
@@ -52,16 +53,24 @@
                                             <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
                                         </label>
                                         
-                                        <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]" %>
+                                        <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]",
+                                                                                    data: { action: "change->album-preview#preview", album_preview_target: "input" } %>
+                                        <template data-album-preview-target="template">
+                                            <div class="photo-preview-item">
+                                                <img class="img-fluid rounded" src="" alt="Preview">
+                                                <button type="button" class="btn-remove-photo" data-action="click->album-preview#remove">
+                                                <i class="bi bi-x"></i>
+                                                </button>
+                                            </div>
+                                        </template>
+
+                                        <div id="deleted-photo-ids" data-album-preview-target="deletedInput"></div>
+
                                     </div>
-                                    </div>
-                            </div>
-                            <div class="d-flex gap-5 submit">
+                                </div>
+                            </div>           
+                            <div class="d-flex gap-3 submit">
                                 <%= form.submit "Save", class: "btn btn-success" %>
-                                <%= link_to "Delete", users_album_path(@album), 
-                                    method: :delete,
-                                    data: { confirm: "Are you sure you want to delete this album?" },
-                                    class: "btn btn-danger" %>
                             </div>
                         <% end %>
                     </div>
@@ -70,72 +79,3 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const albumPhotosInput = document.getElementById("album_photos");
-        const photoUploadContainer = document.querySelector(".photo-upload-container");
-        const addPhotoPlaceholder = document.querySelector(".add-photo-placeholder");
-
-        function createPhotoPreviewItem(src, photoId = null) {
-            const div = document.createElement("div");
-            div.classList.add("photo-preview-item");
-
-            const img = document.createElement("img");
-            img.src = src;
-            img.classList.add("img-fluid", "rounded");
-
-            const removeButton = document.createElement("button");
-            removeButton.type = "button";
-            removeButton.classList.add("btn-remove-photo");
-            if (photoId) {
-                removeButton.dataset.photoId = photoId;
-            }
-            removeButton.innerHTML = '<i class="bi bi-x"></i>';
-
-            removeButton.addEventListener('click', function(e) {
-                e.stopPropagation(); 
-                div.remove();
-            });
-
-            div.appendChild(img);
-            div.appendChild(removeButton);
-
-            return div;
-        }
-
-        if (albumPhotosInput) {
-            albumPhotosInput.addEventListener("change", (event) => {
-                const files = event.target.files;
-
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const newPhotoItem = createPhotoPreviewItem(e.target.result);
-                            photoUploadContainer.insertBefore(newPhotoItem, addPhotoPlaceholder);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                }
-            });
-        }
-
-        photoUploadContainer.addEventListener('click', function(event) {
-            const clickedButton = event.target.closest('.btn-remove-photo');
-            if (clickedButton) {
-                event.stopPropagation(); 
-                const photoItem = clickedButton.closest('.photo-preview-item');
-                if (photoItem) {
-                    photoItem.remove();
-                    const photoId = clickedButton.dataset.photoId;
-                    if (photoId) {
-                        console.log(`Ảnh đã tồn tại với ID ${photoId} được xóa khỏi DOM. Cần xử lý xóa trên server.`);
-                    } else {
-                        console.log("Ảnh mới được xóa khỏi DOM.");
-                    }
-                }
-            }
-        });
-    });
-</script>

@@ -42,7 +42,7 @@
                                             <% @album.photos.each do |photo| %>
                                                 <div class="photo-preview-item">
                                                     <img src="<%= photo.featured_image.url %>" alt="Album Photo" class="img-fluid rounded">
-                                                    <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>" data-action="click->album-remove#remove">
+                                                    <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>" data-action="click->album-preview#remove">
                                                         <i class="bi bi-x"></i>
                                                     </button>
                                                 </div>
@@ -64,15 +64,8 @@
                                             </div>
                                         </template>
                                     </div>
-                            </div>
-                            <template data-album-preview-target="template">
-                                <div class="photo-preview-item">
-                                    <img class="img-fluid rounded" src="" alt="Preview">
-                                    <button type="button" class="btn-remove-photo" data-action="click->album-preview#remove">
-                                    <i class="bi bi-x"></i>
-                                    </button>
                                 </div>
-                            </template>             
+                            </div>           
                             <div class="d-flex gap-3 submit">
                                 <%= form.submit "Save", class: "btn btn-success" %>
                             </div>

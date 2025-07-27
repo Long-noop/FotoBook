@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "container", "template"]
+  static targets = ["input", "container", "template", "deletedInput"]
 
   connect() {
     console.log("AlbumPhotosController connected");
@@ -29,13 +29,21 @@ export default class extends Controller {
   remove(event) {
     const button = event.target.closest("button");
     const item = button.closest(".photo-preview-item");
+
     if (item) {
       const photoId = button.dataset.photoId;
       item.remove();
+
       if (photoId) {
-        console.log(`Cần gửi yêu cầu xoá ảnh có ID: ${photoId}`);
-      } else {
-        console.log("Ảnh vừa upload đã bị xoá khỏi DOM");
+        const inputContainer = this.deletedInputTarget;
+        const newInput = document.createElement("input");
+        newInput.type = "hidden";
+        newInput.name = "album[deleted_photo_ids][]";
+        newInput.value = photoId;
+        inputContainer.appendChild(newInput);
+
+        console.log(">>> Added deleted photo ID:", photoId);
+        console.log(">>> Input DOM:", inputContainer.innerHTML);
       }
     }
   }

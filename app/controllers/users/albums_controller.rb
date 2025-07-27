@@ -46,12 +46,17 @@ class Users::AlbumsController < ApplicationController
 
   def update
     if @album.update(album_params)
+      if params[:album][:deleted_photo_ids].present?
+        Photo.where(id: params[:album][:deleted_photo_ids]).destroy_all
+      end
+
       attach_photos_to_album(@album, params[:album][:photos])
       redirect_to users_profiles_path, notice: "Album updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def destroy
     @album.destroy
