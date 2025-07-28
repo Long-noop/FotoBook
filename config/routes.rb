@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  root "homes#index"
+  # root "homes#index"
+  root "users/photos#index"
 
   namespace :users do
     resources :profiles

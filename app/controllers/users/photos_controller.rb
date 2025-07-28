@@ -1,12 +1,12 @@
 module Users
   class PhotosController < ApplicationController
-    before_action :authenticate_user!, except: [ :feed ]
+    before_action :authenticate_user!, except: [ :feed, :index ]
     before_action :set_photo, only: [ :show, :edit, :update, :destroy ]
     before_action :set_feed_photos, only: [ :feed ]
     before_action :set_discovery_photos, only: [ :discovery ]
 
     def index
-      page_limit = 8
+      page_limit = 4
       @current_page = params[:page].to_i
 
       @photos = Photo.offset(page_limit*@current_page).limit(page_limit)

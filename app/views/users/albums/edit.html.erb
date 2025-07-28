@@ -14,65 +14,7 @@
                     </div>
                     <div class="under"></div>
                     <div class="card p-4">
-                        <%= form_with model: @album, url: users_album_path(@album), local: true, method: :patch, html: { multipart: true } do |form| %>
-                            <div>
-                                <div class="g-4">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <div class="mb-3">
-                                                <%= form.label :title, class: "form-label" %>
-                                                <%= form.text_field :title, class: "form-control", placeholder: "..." %>
-                                            </div>
-                                            <div class="mb-3">
-                                                <%= form.label :mode, class: "form-label" %>
-                                                <%= form.select :mode, [
-                                                    ['Public', 'public_mode'],
-                                                    ['Private', 'private_mode'],
-                                                    ], { selected: 'public_mode' }, { class: "form-select" } %>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <%= form.label :description, class: "form-label" %>
-                                            <%= form.text_area :description, class: "form-control description", rows: 8, placeholder: "..." %>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="photo-upload-container d-flex flex-wrap gap-4" data-controller="album-preview" data-album-preview-target="container">
-                                        <% if @album.photos.present? %>
-                                            <% @album.photos.each do |photo| %>
-                                                <div class="photo-preview-item">
-                                                    <img src="<%= photo.featured_image.url %>" alt="Album Photo" class="img-fluid rounded">
-                                                    <button type="button" class="btn-remove-photo" data-photo-id="<%= photo.id %>" data-action="click->album-preview#remove">
-                                                        <i class="bi bi-x"></i>
-                                                    </button>
-                                                </div>
-                                            <% end %>
-                                        <% end %>
-                                        
-                                        <label for="album_photos" class="add-photo-placeholder">
-                                            <img src="<%= asset_path('plus_icon.png') %>" alt="Add Photo">
-                                        </label>
-                                        
-                                        <%= form.file_field :photos, multiple: true, accept: "image/*", class: "d-none", id: "album_photos", name: "album[photos][]",
-                                                                                    data: { action: "change->album-preview#preview", album_preview_target: "input" } %>
-                                        <template data-album-preview-target="template">
-                                            <div class="photo-preview-item">
-                                                <img class="img-fluid rounded" src="" alt="Preview">
-                                                <button type="button" class="btn-remove-photo" data-action="click->album-preview#remove">
-                                                <i class="bi bi-x"></i>
-                                                </button>
-                                            </div>
-                                        </template>
-
-                                        <div id="deleted-photo-ids" data-album-preview-target="deletedInput"></div>
-
-                                    </div>
-                                </div>
-                            </div>           
-                            <div class="d-flex gap-3 submit">
-                                <%= form.submit "Save", class: "btn btn-success" %>
-                            </div>
-                        <% end %>
+                        <%=render partial: "users/albums/shared/form_edit", locals: {form_url: users_album_path(@album), form_method: :patch} %>
                     </div>
                 </div>                 
             </div>

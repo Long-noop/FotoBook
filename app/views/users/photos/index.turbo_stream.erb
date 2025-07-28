@@ -1,5 +1,5 @@
 <%= turbo_stream.append "photo-list" do %>
-    <%= render partial: "users/photos/photo", locals: {photos: @photos} %>
+    <%= render partial: "users/photos/shared/photo", locals: {photos: @photos} %>
 <% end %>
 
 <% if @next_page.present? %>
