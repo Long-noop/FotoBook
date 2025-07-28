@@ -15,23 +15,26 @@
                             <%= form_with model: current_user, url: users_profile_path, method: :patch, local: true, html: { multipart: true } do |f| %>
                                 <div class="form-name mb3">
                                     <div class="form-label"></div>
-                                    <div data-controller="image-preview"
-                                        data-image-preview-target="preview input"
-                                        class="avatar-upload-container text-center mb-4">
+                                    <div data-controller="image-preview" class="avatar-upload-container text-center mb-4">
                                         <%= image_tag(
                                             current_user.avatar.present? ? current_user.avatar.url : asset_path('plus_icon.png'),
                                             class: "profile-edit-avatar mb-3 placeholder-image",
                                             id: "avatar-preview",
-                                            data: { image_preview_target: "preview", placeholder: asset_path('plus_icon.png') }) %>
+                                            data: { image_preview_target: "preview", placeholder: asset_path('plus_icon.png') }) 
+                                        %>
                                         <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
-                                            <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
-                                            CHANGE
-                                            <%= f.file_field :avatar,
-                                                accept: "image/*",
-                                                class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
-                                                id: "avatar-input" %>
+                                            <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden"> CHANGE
                                             </button>
                                         </label>
+
+                                        <%= f.file_field :avatar,
+                                            accept: "image/*",
+                                            class: "position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer",
+                                            id: "avatar-input",
+                                            data:{
+                                                image_preview_target: "input",
+                                                action: "image-preview#previewImage"}
+                                        %>
                                     </div>
                                 </div>
                             
