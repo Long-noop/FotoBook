@@ -16,7 +16,7 @@
 
       <% label_class = "add-photo-placeholder" %>
       <% label_class += " attached" if @photo.featured_image.present? %>
-      <%= form.label :featured_image, class: label_class, data: { controller: "image-preview", image_preview_target: "container" } do %>
+      <%= form.label :featured_image, class: label_class, data: { controller: "image-preview"} do %>
         <% image_class = "photo-preview img-fluid rounded" %>
         <% if @photo.featured_image.present? %>
           <% image_class += " attached-image" %>

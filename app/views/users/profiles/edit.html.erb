@@ -15,12 +15,14 @@
                             <%= form_with model: current_user, url: users_profile_path, method: :patch, local: true, html: { multipart: true } do |f| %>
                                 <div class="form-name mb3">
                                     <div class="form-label"></div>
-                                        <div class="avatar-upload-container text-center mb-4">
-                                        <% if current_user.avatar.present? %> 
-                                            <%= image_tag current_user.avatar.url, class: "profile-edit-avatar mb-3"%>
-                                        <% else %>
-                                            <%= image_tag 'plus_icon.png', alt: "User Avatar", class: "profile-edit-avatar mb-3" %>
-                                        <% end %>   
+                                    <div data-controller="image-preview"
+                                        data-image-preview-target="preview input"
+                                        class="avatar-upload-container text-center mb-4">
+                                        <%= image_tag(
+                                            current_user.avatar.present? ? current_user.avatar.url : asset_path('plus_icon.png'),
+                                            class: "profile-edit-avatar mb-3 placeholder-image",
+                                            id: "avatar-preview",
+                                            data: { image_preview_target: "preview", placeholder: asset_path('plus_icon.png') }) %>
                                         <label for="avatar-input" class="change-avatar-overlay" style="cursor: pointer;">
                                             <button type="button" class="btn btn-dark btn-sm position-relative overflow-hidden">
                                             CHANGE
