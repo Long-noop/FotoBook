@@ -1,5 +1,7 @@
 <div class="add-button mb-4">
-    <button><%= link_to 'Add Album', new_users_album_path %></button>
+    <%if user == current_user%>
+        <button><%= link_to 'Add Album', new_users_album_path %></button>
+    <%end%>
 </div>
 <div class="row g-4 album-list">
     <% user.albums.each do |album|%>

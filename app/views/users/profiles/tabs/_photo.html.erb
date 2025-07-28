@@ -1,5 +1,7 @@
 <div class="add-button mb-4">
-    <button><%= link_to 'Add Photo', new_users_photo_path %></button>
+    <%if user == current_user%>
+        <button><%= link_to 'Add Photo', new_users_photo_path %></button>
+    <%end%>
 </div>
 <div class="row g-4 photo-list">
     <% user.photos.each do |photo|%>
