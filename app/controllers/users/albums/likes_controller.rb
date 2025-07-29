@@ -2,7 +2,7 @@ module Users
   module Albums
     class LikesController < ApplicationController
       before_action :authenticate_user!
-      before_action :set_Album
+      before_action :set_album
 
       def create
         current_user.likes.create(likeable: @album)
@@ -24,7 +24,7 @@ module Users
 
       private
 
-      def set_Album
+      def set_album
         @album = Album.find(params[:album_id])
       end
     end

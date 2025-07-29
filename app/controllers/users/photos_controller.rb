@@ -4,6 +4,7 @@ module Users
     before_action :set_photo, only: [ :show, :edit, :update, :destroy ]
     before_action :set_feed_photos, only: [ :feed ]
     before_action :set_discovery_photos, only: [ :discovery ]
+    before_action :set_tab, only: [ :feed, :discovery ]
 
     def index
       page_limit = Photo::PER_PAGE
@@ -19,11 +20,9 @@ module Users
     end
 
     def feed
-      @tab = "photo"
     end
 
     def discovery
-      @tab = "photo"
     end
 
     def show
@@ -67,6 +66,10 @@ module Users
 
       def set_photo
         @photo = Photo.find(params[:id])
+      end
+
+      def set_tab
+        @tab = "photo"
       end
 
 

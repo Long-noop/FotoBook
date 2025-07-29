@@ -3,18 +3,16 @@ class Users::AlbumsController < ApplicationController
   before_action :set_album, only: [ :show, :edit, :update, :destroy ]
   before_action :set_feed_albums, only: [ :feed ]
   before_action :set_discovery_albums, only: [ :discovery ]
+  before_action :set_tab, only: [ :index, :feed, :discovery ]
 
   def index
     @albums =Album.where(mode: :public_mode)
-    @tab = "album"
   end
 
   def feed
-    @tab = "album"
   end
 
   def discovery
-    @tab = "album"
   end
 
   def show
@@ -67,6 +65,10 @@ class Users::AlbumsController < ApplicationController
 
     def set_album
       @album = Album.find(params[:id])
+    end
+
+    def set_tab
+      @tab = "album"
     end
 
     def set_feed_albums
