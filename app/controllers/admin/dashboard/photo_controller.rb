@@ -1,12 +1,11 @@
-class Admin::Dashboard::PhotoController < ApplicationController
-    before_action :authenticate_admin!
-    before_action :set_photo, only: [ :edit, :update ]
+class Admin::Dashboard::PhotoController < Admin::BaseController
+  before_action :set_photo, only: [ :edit, :update ]
+
   def index
     @photos = Photo.order(created_at: :desc).page(params[:page]).per(12)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @photo.update(photo_params)
@@ -17,15 +16,9 @@ class Admin::Dashboard::PhotoController < ApplicationController
   end
 
   private
-  def authenticate_admin!
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Unauthorized!!!"
-    end
-  end
 
   def set_photo
-    photos = Photo.all
-    @photo = photos.find(params[:id])
+    @photo = Photo.find(params[:id])
   end
 
   def photo_params

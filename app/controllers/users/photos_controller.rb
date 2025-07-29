@@ -64,13 +64,7 @@ module Users
     end
 
     private
-      # def set_photo
-      #   # followed_users = current_user.followings
-      #   # photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
-      #   # @photo = photos.find(params[:id])
-      #   @my_photo = current_user.photos.find(params[:id])
-      #   @photo = Photo.where(mode: :public_mode).find(params[:id])
-      # end
+
       def set_photo
         @photo = Photo.find(params[:id])
       end

@@ -1,13 +1,11 @@
-class Admin::Dashboard::UserController < ApplicationController
-  before_action :authenticate_admin!
+class Admin::Dashboard::UserController < Admin::BaseController
   before_action :set_user, only: [ :edit, :update, :destroy ]
 
   def index
     @users = User.order(created_at: :desc).page(params[:page]).per(10)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -26,12 +24,6 @@ class Admin::Dashboard::UserController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def authenticate_admin!
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Unauthorized!!!"
-    end
   end
 
   def user_params

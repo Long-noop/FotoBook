@@ -1,10 +1,11 @@
-class Admin::Dashboard::AlbumController < ApplicationController
-  before_action :authenticate_admin!
+class Admin::Dashboard::AlbumController < Admin::BaseController
   before_action :set_album, only: [ :edit, :update ]
 
-
-  def edit
+  def index
+    @albums = Album.order(created_at: :desc).page(params[:page]).per(12)
   end
+
+  def edit; end
 
   def update
     if @album.update(album_params)
@@ -15,16 +16,7 @@ class Admin::Dashboard::AlbumController < ApplicationController
     end
   end
 
-  def index
-    @albums= Album.order(created_at: :desc).page(params[:page]).per(12)
-  end
-
   private
-  def authenticate_admin!
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Unauthorized!!!"
-    end
-  end
 
   def album_params
     params.require(:album).permit(:title, :description, :mode)
@@ -54,7 +46,6 @@ class Admin::Dashboard::AlbumController < ApplicationController
   end
 
   def set_album
-    albums = Album.all
-    @album = albums.find(params[:id])
+    @album = Album.find(params[:id])
   end
 end
