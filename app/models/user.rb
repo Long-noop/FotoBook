@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  PER_PAGE = 10
+
+  paginates_per PER_PAGE
   has_many :photos, dependent: :destroy
   has_many :albums, dependent: :destroy
   has_many :likes, dependent: :destroy

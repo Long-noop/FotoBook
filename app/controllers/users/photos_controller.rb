@@ -6,7 +6,7 @@ module Users
     before_action :set_discovery_photos, only: [ :discovery ]
 
     def index
-      page_limit = 4
+      page_limit = Photo::PER_PAGE
       @current_page = params[:page].to_i
 
       @photos = Photo.offset(page_limit*@current_page).limit(page_limit)

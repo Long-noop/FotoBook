@@ -1,4 +1,6 @@
 class Photo < ApplicationRecord
+  PER_PAGE = 4
+
   enum :mode, [ :private_mode, :public_mode ], default: :private_mode
   # has_one_attached :featured_image
   has_rich_text :desc
