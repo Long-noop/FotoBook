@@ -6,7 +6,7 @@ class Users::AlbumsController < ApplicationController
   before_action :set_tab, only: [ :index, :feed, :discovery ]
 
   def index
-    @albums =Album.where(mode: :public_mode)
+    @albums = Album.public_only
   end
 
   def feed
@@ -21,7 +21,7 @@ class Users::AlbumsController < ApplicationController
   end
 
   def close_modal
-      render turbo_stream: turbo_stream.update("album_modal", "")
+    render turbo_stream: turbo_stream.update("album_modal", "")
   end
 
   def new
@@ -39,8 +39,7 @@ class Users::AlbumsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @album.update(album_params)
@@ -54,7 +53,6 @@ class Users::AlbumsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-
 
   def destroy
     @album.destroy
@@ -74,15 +72,15 @@ class Users::AlbumsController < ApplicationController
     def set_feed_albums
       if user_signed_in?
         followed_users = current_user.followings
-        @feed_albums = Album.where(user: followed_users + [ current_user ], mode: :public_mode)
+        @feed_albums = Album.public_only.where(user: followed_users + [ current_user ])
       else
-        @feed_albums = Album.where(mode: :public_mode)
+        @feed_albums = Album.public_only
       end
     end
 
     def set_discovery_albums
       followed_users = current_user.followings
-      @discovery_albums = Album.where(mode: :public_mode).where.not(user: followed_users + [ current_user ])
+      @discovery_albums = Album.public_only.where.not(user: followed_users + [ current_user ])
     end
 
     def album_params

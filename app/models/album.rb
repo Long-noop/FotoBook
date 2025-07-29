@@ -1,5 +1,6 @@
 class Album < ApplicationRecord
   enum :mode, [ :private_mode, :public_mode ], default: :public_mode
+  scope :public_only, -> { where(mode: :public_mode) }
 
   has_many :album_photos, dependent: :destroy
   has_many :photos, through: :album_photos

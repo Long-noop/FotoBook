@@ -76,15 +76,15 @@ module Users
       def set_feed_photos
         if user_signed_in?
           followed_users = current_user.followings
-          @feed_photos = Photo.where(user: followed_users + [ current_user ], mode: :public_mode)
+          @feed_photos = Photo.public_only.where(user: followed_users + [ current_user ])
         else
-          @feed_photos = Photo.where(mode: :public_mode)
+          @feed_photos = Photo.public_only
         end
       end
 
       def set_discovery_photos
         followed_users = current_user.followings
-        @discovery_photos = Photo.where(mode: :public_mode).where.not(user: followed_users + [ current_user ])
+        @discovery_photos = Photo.public_only.where.not(user: followed_users + [ current_user ])
       end
 
       def photo_params
